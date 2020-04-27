@@ -1,15 +1,7 @@
 = simple_form_for(@post) do |f|
   .form-inputs
-    / <input class="input" type="tags" placeholder="Add Tag" value="Tag1,Tag2,Tag3">
-    / = tag(:input,
-      type: 'tags',
-      placeholder: 'Add Tag',
-      value: 'Untagged, Test',
-      class: 'input tags',
-      id: 'post_tags',
-      name: 'post[tags]')
     = f.input :title, id: 'article-title'
-    = f.input :tags, label: false, as: :tags
+    = f.input :tags, input_html: { value: @tags }, label: false, as: :tags
     = f.rich_text_area :content, id: 'article-content'
 
   .form-actions

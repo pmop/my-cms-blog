@@ -5,7 +5,7 @@ module ApplicationHelper
     img_component =
       if (user) and user.avatar.attached?
         tag(:img,
-            'data-src' => polymorphic_url(user.avatar),
+            'data-src' => polymorphic_url(user.avatar.variant(resize: "#{size}x#{size}")),
             class: 'is-rounded lazyload')
       else
         content_tag(:div, link_to('Upload Photo',
@@ -14,7 +14,7 @@ module ApplicationHelper
       end
     content_tag(:figure,
                 img_component,
-                class: %w(image
+                class: %W(image
                           form-avatar-img-area
                           container-hcenters
                           is-#{size}x#{size})

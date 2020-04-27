@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :set_tags, only: [:new]
   before_action :set_user, only: [:create, :update]
   before_action :authenticate_user!
 
@@ -26,23 +27,22 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
-    untagged = Tag.find_by(permalink: "untagged")
-
     @post = Post.new(title: post_params[:title],
                      content:  post_params[:content],
-                     permalink: generate_permalink_from_title(post_params[:title]))
+                     permalink: generate_permalink(post_params[:title]) + SecureRandom.hex(4).to_s)
+
+    set_tags(post_params[:tags])
     @post.user = @user
-    @post.tags << untagged
+
+    @tags.each do |tag|
+      @post.tags << tag
+    end
 
     respond_to do |format|
       if @post.save
-        puts 'here'
         format.html { redirect_to @post, notice: 'Post was successfully created.' }
         format.json { render :show, status: :created, location: @post }
       else
-        puts 'error'
-        puts @post.errors.messages
-        puts @user
         format.html { render :new }
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
@@ -83,17 +83,47 @@ class PostsController < ApplicationController
       @user = current_user
     end
 
-    def generate_permalink_from_title(title)
-      t = title
+    def generate_permalink(title)
+      title
         .downcase
         .gsub(/[^a-z]/,'')
         .gsub(/\s+/, '_')
+    end
 
-      t + SecureRandom.hex(4).to_s
+    def find_or_create_tag(tag_name)
+      permalink = generate_permalink(tag_name)
+      t = Tag.find_by(permalink: permalink)
+      unless t.present?
+        t = Tag.create!(name: tag_name, permalink: permalink)
+      end
+      return t
+    end
+
+    def set_tags(tags=nil)
+      if not tags.nil? # We transform from tag name array to tag instance array
+        @tags = process_tags_from_input(post_params[:tags])
+        if @tags.empty?
+          @tags << find_or_create_tag("untagged")
+        end
+
+      else # We transform from tag instances array to tag names array
+        unless @post.nil?
+          @tags = @post.tags.map {|tag| tag.name }.join(',')
+        else
+          @tags = ["Untagged"]
+        end
+      end
+    end
+
+    # Tags currently are submited in a comma separated string array
+    # so we need to transform it into an array of tag models
+    def process_tags_from_input(tags)
+      tags.split(',')
+        .map { |tag| find_or_create_tag(tag.strip) }
     end
 
     # Only allow a list of trusted parameters through.
     def post_params
-      params.require(:post).permit(:title, :content)
+      params.require(:post).permit(:title, :tags, :content)
     end
 end

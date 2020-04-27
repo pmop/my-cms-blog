@@ -1,29 +1,32 @@
 .hero.is-fullwidth.is.full-height
-  .hero-head
   .hero-body
-    section.section
-      .container.is-fluid
-        .columns.is-centered
-          .column.is-7.box
-            .tags
-              - @post.tags.each do |tag|
-                  span.tag.is-link.is-rounded = tag.name
 
-            h1.title = @post.title
-            hr
-            == @post.content
-            .columns style='margin-top: 1in;'
-    .hero-foot
-      .columns.is-centered
-        div class='column
-                columns
-                is-5-tablet
-                is-4-desktop
-                is-4-widescreen
-                box hero'
-          = user_avatar(@post.user)
-          .column.is-two-fifth style='display: flex; flex-direction: column-reverse;'
-            .is-size-6
-              = content_tag(:h1, "Author: #{@post.user.name}")
+.container.is-fluid
+  .columns.is-centered
+    .column.is-7.box
+      div.section
+        .container.is-fluid
+          .tags
+            - @post.tags.each do |tag|
+                span.tag.is-rounded = tag.name
 
+          h1.title = @post.title
+          hr
+          == @post.content
+          .columns style='margin-top: 1in;'
+
+div.section
+  .columns.is-centered
+    .column.is-7
+      div class='column
+              columns
+              is-5-tablet
+              is-4-desktop
+              is-4-widescreen
+              box hero'
+        = user_avatar(@post.user)
+        .column.is-two-fifth style='display: flex; flex-direction: column-reverse;'
+          .is-size-6
+            .div
+              == "<h1><strong>Author: </strong> #{strip_tags @post.user.name}</h1>"
 
