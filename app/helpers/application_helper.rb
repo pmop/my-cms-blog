@@ -45,4 +45,13 @@ module ApplicationHelper
                )
   end
 
+  def render_tags(tags)
+    unless tags.nil?
+      content_tag(:div,
+                  tags.map { |tag|
+                    content_tag(:span, tag.name, class:'tag is-rounded' ) }.reduce(&:+),
+                  class: 'tags')
+    end
+  end
+
 end
