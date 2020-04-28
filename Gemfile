@@ -66,7 +66,6 @@ gem 'slim', '~> 4.0', '>= 4.0.1'
 
 gem 'slim-rails', '~> 3.2'
 
- gem 'image_processing'
-gem 'ruby-vips'
+gem 'image_processing'
 
 gem "google-cloud-storage", "~> 1.11", require: false
