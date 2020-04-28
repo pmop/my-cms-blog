@@ -29,7 +29,7 @@ section.hero.is-primary.is-fullheight
             br
             = link_to "Back", :back
 
-javascript:
+/ javascript:
   var boot_croppie = () => {
     let upload_image = document.querySelector('img');
       if (upload_image) {
@@ -41,14 +41,12 @@ javascript:
               enableOrientation: false
             }
           );
-
           img_src = upload_image.getAttribute('src');
           console.log(img_src);
           if (img_src)
             croppie.bind({
               url: img_src
             });
-
       }
   }
   let loaded = () => console.log('loaded');
