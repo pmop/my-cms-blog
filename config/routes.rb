@@ -2,11 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
   root to: 'home#index'
   resources :posts
-  resources :tags do
-    collection do
-      get 'search'
-    end
-  end
+  get 'tags/(/:permalink)', to: 'tags#index', as: :search_by_tag
 
   get '/users', to: 'users#index', as: :users
   get '/users/:id', to: 'users#show', as: :user

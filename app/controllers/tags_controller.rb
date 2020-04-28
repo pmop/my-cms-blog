@@ -1,40 +1,23 @@
 class TagsController < ApplicationController
-  before_action :set_tag, only: [:show, :edit, :update, :destroy]
+  before_action :set_tag, only: [:edit, :update, :destroy]
 
   # GET /tags
   # GET /tags.json
   def index
-    @tags = Tag.all
-  end
-
-  # GET /tags/1
-  # GET /tags/1.json
-  def show
-  end
-
-  # GET /tags/new
-  def new
-    @tag = Tag.new
+    @posts = Tag.find_by(permalink: search_params).posts
+    respond_to do |format|
+      unless @posts.nil?
+        format.html { render :index, notice: "Posts tagged as #{ search_params }"}
+        format.json { render json: @posts, status: :ok }
+      else
+        format.html { render :not_found }
+        format.json { head :no_content }
+      end
+    end
   end
 
   # GET /tags/1/edit
   def edit
-  end
-
-  # POST /tags
-  # POST /tags.json
-  def create
-    @tag = Tag.new(tag_params)
-
-    respond_to do |format|
-      if @tag.save
-        format.html { redirect_to @tag, notice: 'Tag was successfully created.' }
-        format.json { render :show, status: :created, location: @tag }
-      else
-        format.html { render :new }
-        format.json { render json: @tag.errors, status: :unprocessable_entity }
-      end
-    end
   end
 
   # PATCH/PUT /tags/1
@@ -70,5 +53,9 @@ class TagsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def tag_params
       params.require(:tag).permit(:name, :posts_id)
+    end
+
+    def search_params
+      params.require(:permalink)
     end
 end

@@ -17,6 +17,18 @@
 @import "./actiontext.scss";
 @import 'bulma-tagsinput.min';
 
+.footer {
+	background-color: hsl(209, 100%, 20%)!important;
+	color: white;
+}
+
+.transition {
+	background: rgb(247,251,255);
+	background: linear-gradient(180deg, rgba(247,251,255,1) 0%, rgba(0,53,102,1) 100%);
+	width: 100%;
+	height: 1rem;
+}
+
 .img-placeholder {
 	width: 128px;
 	height: 128px;

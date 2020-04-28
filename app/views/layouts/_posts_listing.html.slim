@@ -1,10 +1,10 @@
-.hero.is-fullheight
+.hero.is-fullheight.is-fullwidth
   .hero-head
   .hero-body
     .container.is-fluid
       .columns.is-centered
         .column.is-7.box
-          - if @posts.nil? or @posts.all.empty?
+          - if @posts.nil? or @posts.empty?
             h1.is-size-2.has-text-centered Welp! We don't have any articles yet!
             .columns
               .column.is-6.container.is-centered
@@ -26,4 +26,9 @@
                   .container style='display: flex; flex-direction: row-reverse; padding-top: 1rem;'
                     = link_to 'Read post...', post, class: 'button is-medium is-outlined is-link'
                   hr
-    .hero-foot
+  .hero-foot
+    .transition
+    .footer
+      p Pedro's Blog
+      p &copy; Pedro Pinheiro. All rights reserved.
+
