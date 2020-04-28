@@ -3,4 +3,7 @@ class HomeController < ApplicationController
     # TODO optimize queries
     @posts = Post.all
   end
+
+  def auth
+  end
 end

@@ -1,7 +1,6 @@
-section.hero.is-primary.is-fullheight
-  .hero-body
-    .container
-      .columns.is-centered
-        .column.is-5-tablet.is-4-desktop.is-4-widescreen
-          .box
-            == yield
+.container.is-fluid
+  .columns.is-centered
+    .column.is-5-tablet.is-4-desktop.is-4-widescreen
+      section.section style='height: 90vh;'
+        .box
+          == yield
