@@ -5,9 +5,49 @@ html
     = csrf_meta_tags
     = csp_meta_tag
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = stylesheet_link_tag "https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
     script type='text/javascript' src="https://cdn.jsdelivr.net/npm/bulma-tagsinput@2.0.0/dist/js/bulma-tagsinput.min.js"
   body
-    - if user_signed_in?
-      = render 'layouts/navbar'
-    == yield
+    .hero.is-fullheight.is-fullwidth
+      .hero-head
+        nav.navbar
+          .container
+            .navbar-brand
+              span.is-size-3
+                a.navbar-item href=root_path PMOP's Blog
+              span.navbar-burger.burger data-taget='navbarMenuHeroA'
+                span
+                span
+                span
+            div.navbar-menu id='navbarMenuHeroA'
+              .navbar-end
+                a.navbar-item href=root_path Home
+                a.navbar-item About
+                span.navbar-item
+                  a.button.is-primary.is-inverted
+                    span.icon
+                      img height="32" width="32" src="https://unpkg.com/simple-icons@v2/icons/github.svg"
+                    span GitHub
+
+
+        - if user_signed_in?
+          = render 'layouts/navbar'
+        - if notice.present?
+          .notification.is-warning
+            button.delete
+            p = notice
+      .hero-body
+        == yield
+      .hero-foot
+        == render 'application/footer'
+
+  javascript:
+    document.addEventListener('DOMContentLoaded', () => {
+      (document.querySelectorAll('.notification .delete') || []).forEach(($delete) => {
+        $notification = $delete.parentNode;
+        $delete.addEventListener('click', () => {
+          $notification.parentNode.removeChild($notification);
+        });
+      });
+    });

@@ -1,0 +1,25 @@
+nav.navbar.is-dark.has-shadow role='navigation' aria-label='main navigation'
+    .navbar_start
+      .navbar_item
+        .buttons style='margin-top: 12px; margin-left: 1rem;'
+          - if @post.present? and @post.id.present?
+            => link_to 'Edit Post', edit_post_path(@post),
+              class: 'navbar-item button is-small is-link'
+
+          => link_to('New Post', new_post_url,
+              class: 'navbar-item button is-small is-success')
+    .navbar-end
+      .navbar-item
+        .buttons.has-addons
+          - unless user_signed_in?
+            = link_to new_user_registration_path, class: 'navbar-item button is-info is-outlined is-small' do
+              span Sign up
+
+            = link_to new_user_session_path, class: 'navbar-item button is-success is-outlined is-small' do
+              span Sign in
+
+          - if user_signed_in?
+            = link_to posts_path, class:'button is-link is-rounded is-small' do
+              span Dashboard
+            = link_to destroy_user_session_path, method: :delete,  class: 'navbar-item button is-danger is-rounded is-small' do
+              span Sign out
