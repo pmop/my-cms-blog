@@ -1,3 +1,5 @@
+= stylesheet_link_tag 'croppie.css'
+= javascript_include_tag 'croppie'
 section.hero.is-primary.is-fullheight
   .hero-body
     .container
@@ -9,9 +11,8 @@ section.hero.is-primary.is-fullheight
             = simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
               .form-inputs
                 .form-avatar
-                  = user_avatar(f.object)
-                  = f.file_field :avatar,
-                   accept: "image/png,image/gif,image/jpeg"
+                  = user_avatar_nl(f.object)
+                  = f.file_field :avatar, accept: "image/png,image/gif,image/jpeg"
                 hr
                 = f.input :current_password, hint: "We need your current password to confirm your changes", required: true, input_html: { autocomplete: "current-password" }
                 = f.input :email, required: true, autofocus: true
@@ -27,3 +28,30 @@ section.hero.is-primary.is-fullheight
             = link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete
             br
             = link_to "Back", :back
+
+javascript:
+  var boot_croppie = () => {
+    let upload_image = document.querySelector('img');
+      if (upload_image) {
+        let croppie = new Croppie(upload_image,
+          {
+            viewport: { width: 100, height: 100 },
+              boundary: { width: 300, height: 300 },
+              showZoomer: false,
+              enableOrientation: false
+            }
+          );
+
+          img_src = upload_image.getAttribute('src');
+          console.log(img_src);
+          if (img_src)
+            croppie.bind({
+              url: img_src
+            });
+
+      }
+  }
+  let loaded = () => console.log('loaded');
+  let upload_image = document.querySelector('img');
+  upload_image.onload = boot_croppie
+
