@@ -1,0 +1,31 @@
+.container
+  .columns.is-centered
+    .column.is-7
+      .box
+        h1.title Posts
+        hr
+        == render 'posts/posts_index_table'
+        hr
+        = link_to 'New Post', new_post_path, class: 'button is-primary'
+
+      .box
+        h1.title Tags
+        hr
+        == render 'tags/numbered_tags'
+
+      .box
+        h1.title Users
+        hr
+        == render 'users/users_index_listing'
+    .column.is-4
+      .box
+        h1.title Summary
+        hr
+        p Posts: #{@posts.count}
+        p Users: #{@users.count}
+        p Tags:  #{@tags.count}
+
+
+
+
+

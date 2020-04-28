@@ -1,10 +1,12 @@
 class TagsController < ApplicationController
-  before_action :set_tag, only: [:edit, :update, :destroy]
+  before_action :set_tag, only: %i[edit update destroy]
+  before_action :authenticate_user!, only: %i[edit update destroy]
 
   # GET /tags
   # GET /tags.json
   def index
-    @posts = Tag.find_by(permalink: search_params).posts
+    @tag = Tag.find_by(permalink: search_params)
+    @posts = @tag.posts
     respond_to do |format|
       unless @posts.nil?
         format.html { render :index, notice: "Posts tagged as #{ search_params }"}

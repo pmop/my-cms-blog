@@ -1,4 +1,5 @@
 class Post < ApplicationRecord
+  scope :newest, -> { order('created_at DESC') }
   belongs_to :user
   has_rich_text :content
 

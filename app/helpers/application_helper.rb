@@ -57,5 +57,4 @@ module ApplicationHelper
                   class: 'tags')
     end
   end
-
 end
