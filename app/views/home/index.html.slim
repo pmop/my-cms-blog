@@ -1,25 +1,32 @@
-.hero
-  .hero-body
 script src='https://kit.fontawesome.com/536b6779b9.js' crossorigin='anonymous'
-.container.is-fluid
-  .columns.is-centered
-    .column.is-7.box
-      - @posts.all.each do |post|
-        div.section
-          .container.is-fluid
+.hero.is-fullheight
+  .hero-head
+  .hero-body
+    .container.is-fluid
+      .columns.is-centered
+        .column.is-7.box
+          - if @posts.all.empty?
+            h1.is-size-2.has-text-centered Welp! We don't have any articles yet!
             .columns
-              .column.is-four-fifths
-                h1.title = post.title
-                h3 = "Author: #{post.user.name}"
-                h1.subtitle = post.created_at.strftime("%Y %B, %A")
-                .tags
-                  - post.tags.each do |tag|
-                    span.tag.is-rounded = tag.name
+              .column.is-6.container.is-centered
+                img src='/octopus.svg' style='width: 5in; height: auto;'
+          - else
+            - @posts.all.each do |post|
+              div.section
+                .container.is-fluid
+                  .columns
+                    .column.is-four-fifths
+                      h1.title = post.title
+                      h3 = "Author: #{post.user.name}"
+                      h1.subtitle = post.created_at.strftime("%Y %B, %A")
+                      .tags
+                        - post.tags.each do |tag|
+                          span.tag.is-rounded = tag.name
 
-            hr
-            == truncate(strip_tags(post.content.to_s), length: 300)
-            br/
-            .container style='display: flex; flex-direction: row-reverse; padding-top: 1rem;'
-              = link_to 'Read post...', post, class: 'button is-medium is-outlined is-link'
-            hr
-
+                  hr
+                  == truncate(strip_tags(post.content.to_s), length: 300)
+                  br/
+                  .container style='display: flex; flex-direction: row-reverse; padding-top: 1rem;'
+                    = link_to 'Read post...', post, class: 'button is-medium is-outlined is-link'
+                  hr
+    .hero-foot

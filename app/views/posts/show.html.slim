@@ -10,7 +10,9 @@
             - @post.tags.each do |tag|
                 span.tag.is-rounded = tag.name
 
-          h1.title = @post.title
+          h1.is-size-2 = @post.title
+          h1.subtitle == "By: <strong>#{@post.user.name}</strong>,"
+          h1.subtitle = @post.created_at.strftime("%d %B, %Y")
           hr
           == @post.content
           .columns style='margin-top: 1in;'

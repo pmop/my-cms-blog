@@ -8,6 +8,7 @@
     "@rails/ujs": "^6.0.0",
     "@rails/webpacker": "4.2.2",
     "bulma-tagsinput": "^2.0.0",
+    "croppie": "^2.6.4",
     "lazysizes": "^5.2.0",
     "trix": "^1.0.0",
     "turbolinks": "^5.2.0"

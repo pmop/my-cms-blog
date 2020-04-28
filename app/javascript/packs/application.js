@@ -19,5 +19,6 @@ require("channels")
 require("trix")
 require("@rails/actiontext")
 require("lazysizes")
+require("croppie")
 import bulmaTagsinput from "../../../node_modules/bulma-tagsinput/dist/js/bulma-tagsinput.min.js"
 

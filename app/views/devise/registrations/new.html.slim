@@ -1,9 +1,9 @@
 h2 Sign up
 
 = render 'layouts/centered_form'
+  - if resource.errors.messages.present?
+    h1 "#{ resource.errors.full_messages.to_sentence }"
   = simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-    - f.object.errors.messages.present?
-      h1 f.object.errors.messages
 
     .form-inputs
       = f.input :name,

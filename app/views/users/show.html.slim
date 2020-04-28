@@ -1,24 +1,26 @@
-p#notice = notice
-section.hero.is-primary.is-fullheight
+.hero.is-fullheight.is-primary
+  .hero-head
+    - flash[:notice].present?
+      p id='notice' = notice
   .hero-body
-    .container
-      .columns.is-centered
-        .column.columns.is-5-tablet.is-4-desktop.is-4-widescreen.box
-          .column
-            = user_avatar(@user)
-          .column.is-two-fifth
-            .is-size-6
-              strong Email:&nbsp;
-              = @user.email
-            .is-size-6
-              strong Name:&nbsp;
-              = @user.name
-            .is-size-6
-              strong Posts:&nbsp;
-              = "TODO"
-            hr
-            => link_to 'Edit', edit_user_registration_path(@user)
-            '|
-            =< link_to 'Back', users_path
-
-
+    .columns
+      .column
+        .box
+          .columns
+            .column
+              = user_avatar(@user)
+            .column.is-two-fifth
+              .is-size-6
+                strong Email:&nbsp;
+                = @user.email
+              .is-size-6
+                strong Name:&nbsp;
+                = @user.name
+              .is-size-6
+                strong Posts:&nbsp;
+                = "TODO"
+              hr
+              => link_to 'Edit', edit_user_registration_path(@user)
+              '|
+              =< link_to 'Back', users_path
+  .hero-foot
