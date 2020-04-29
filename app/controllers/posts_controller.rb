@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
-  before_action :set_tags, only: [:new]
+  before_action :set_tags, only: [:new, :edit]
   before_action :set_user, only: [:create, :update]
   before_action :authenticate_user!, only: [:new, :edit, :update, :destroy]
 
@@ -52,8 +52,14 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1
   # PATCH/PUT /posts/1.json
   def update
+    hash = {
+              title: post_params[:title],
+              content: post_params[:content]
+          }
+    hash.merge({tags: set_tags(post_params[:tags])}) if not post_params[:tags].empty?
+
     respond_to do |format|
-      if @post.update(post_params)
+      if @post.update(hash)
         format.html { redirect_to @post, notice: 'Post was successfully updated.' }
         format.json { render :show, status: :ok, location: @post }
       else
