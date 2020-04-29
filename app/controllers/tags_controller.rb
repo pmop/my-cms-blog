@@ -6,7 +6,7 @@ class TagsController < ApplicationController
   # GET /tags.json
   def index
     @tag = Tag.find_by(permalink: search_params)
-    @posts = @tag.posts
+    @posts = @tag.posts.with_rich_text_content.newest
     respond_to do |format|
       unless @posts.nil?
         format.html { render :index, notice: "Posts tagged as #{ search_params }"}
