@@ -1,10 +1,7 @@
 class HomeController < ApplicationController
   def index
     # TODO optimize queries
-    @posts = Post.all.newest
+    @posts = Post.all.newest.with_rich_text_content
     @tags = Tag.all
-  end
-
-  def auth
   end
 end
