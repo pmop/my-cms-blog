@@ -4,17 +4,16 @@
     .column.is-6.container.is-centered
       img src='/octopus.svg' style='width: 5in; height: auto;'
 - else
-  - @posts.all.each do |post|
-    - cache post do
-      .hero
-        .container.is-fluid
+  .box
+    - @posts.all.each do |post|
+      - cache post do
+        .container
           .columns
             .column.is-four-fifths
               == render_tags(post.tags)
 
               h1.title.is-1 = post.title
-              h1.subtitle == "By #{post.user.name}"
-              h1.subtitle = post.created_at.strftime("%d %B, %Y")
+              h1.subtitle Posted #{post.created_at.strftime("%d %B, %Y")}
 
           hr
           == truncate(strip_tags(post.content.to_s), length: 300)
@@ -22,3 +21,7 @@
           .container style='display: flex; flex-direction: row-reverse; padding-top: 1rem;'
             = link_to 'Read post...', post, class: 'button is-medium is-outlined is-link'
           hr
+          br/
+          br/
+          br/
+          br/

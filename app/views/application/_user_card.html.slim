@@ -1,0 +1,12 @@
+div class='column
+        columns
+        is-4-tablet
+        is-4-desktop
+        is-4-widescreen
+        box hero'
+  = user_avatar(@post.user)
+  .column.is-two-fifth style='display: flex; flex-direction: column-reverse;'
+    .is-size-6
+      .div
+        == "<h1><strong>Author: </strong> #{strip_tags @post.user.name}</h1>"
+

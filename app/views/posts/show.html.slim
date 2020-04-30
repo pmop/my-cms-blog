@@ -1,21 +1,6 @@
 .container.is-fluid
   .columns.is-centered
-    .column.is-9.box
-      div.section
-        .container.is-fluid
-          == render 'application/post'
-  div.section
-    .columns.is-centered
-      .column.is-7
-        div class='column
-                columns
-                is-5-tablet
-                is-4-desktop
-                is-4-widescreen
-                box hero'
-          = user_avatar(@post.user)
-          .column.is-two-fifth style='display: flex; flex-direction: column-reverse;'
-            .is-size-6
-              .div
-                == "<h1><strong>Author: </strong> #{strip_tags @post.user.name}</h1>"
+    .column.is-full-mobile.is-9-desktop
+      .container.is-post
+        == render 'application/post'
 

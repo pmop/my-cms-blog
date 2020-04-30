@@ -13,6 +13,16 @@
  *= require_tree .
  *= require_self
  */
+$paper: #fff1e5;
+$paper-2: #e6d9ce;
+$claret: #990f3d;
+$oxford: #0f5499;
+$teal: #0d7680;
+$jade: #00994d;
+$wasabi: #96cc28;
+$candy: #ff7faa;
+$crimson: #cc0000;
+$link: $teal;
 @import 'bulma';
 @import "./actiontext.scss";
 @import 'bulma-tagsinput.min';
@@ -22,13 +32,22 @@
 	color: white;
 }
 
-.title {
-	color: black !important;
-}
-.subtitle {
-	color: black !important;
+.counter-tag {
+	background-color: $grey-dark !important;
+	color: white !important;
 }
 
+.post-header {
+	background-color: $paper-2;
+}
+
+body {
+	background-color: #fff1e5 !important;
+}
+
+.is-post > hr {
+	background-color: $dark;
+}
 
 .img-placeholder {
 	width: 128px;
@@ -53,6 +72,3 @@
 	justify-content: space-between;
 }
 
-body {
-	background-color: #f7fbff!important;
-}
