@@ -48,7 +48,7 @@ module ApplicationHelper
   def render_tags(tags)
     unless tags.nil?
       tags_html = tags.map do |tag|
-        content_tag(:a, tag.name, class:'tag is-rounded',
+        content_tag(:a, tag.name, class:'tag is-link is-rounded',
                     href: search_by_tag_path(tag.permalink) )
       end.reduce(&:+)
 

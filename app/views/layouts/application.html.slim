@@ -9,7 +9,7 @@ html
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
     script type='text/javascript' src="https://cdn.jsdelivr.net/npm/bulma-tagsinput@2.0.0/dist/js/bulma-tagsinput.min.js"
   body
-    .hero.is-fullheight.is-fullwidth
+    .hero.is-fullheight.is-fullwidth.is-link
       .hero-head
         nav.navbar
           .container
@@ -25,7 +25,7 @@ html
                 a.navbar-item href=root_path Home
                 a.navbar-item About
                 span.navbar-item
-                  a.button.is-primary.is-inverted
+                  a.button.is-link.is-inverted
                     span.icon
                       img height="32" width="32" src="https://unpkg.com/simple-icons@v2/icons/github.svg"
                     span GitHub

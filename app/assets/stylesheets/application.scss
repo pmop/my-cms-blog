@@ -18,9 +18,17 @@
 @import 'bulma-tagsinput.min';
 
 .footer {
-	background-color: teal !important;
+	background-color: $grey-dark !important;
 	color: white;
 }
+
+.title {
+	color: black !important;
+}
+.subtitle {
+	color: black !important;
+}
+
 
 .img-placeholder {
 	width: 128px;

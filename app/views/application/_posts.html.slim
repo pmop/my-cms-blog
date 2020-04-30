@@ -1,7 +1,8 @@
 .container.is-fluid
   .columns
-    .column.is-9.box
-      == render 'application/posts_listing'
+    .column.is-9
+      .box
+        == render 'application/posts_listing'
     .column.is-3
-      .container.is-fluid.is-bordered
+      .box
         == render 'tags/numbered_tags'

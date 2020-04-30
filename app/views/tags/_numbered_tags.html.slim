@@ -1,11 +1,11 @@
 - if !@tags.nil?
   h1.subtitle Tags
-  .field.is-grouped.is-grouped-multiline
+  .tags.has-addons
     - @tags.each do |tag|
-      .control
-        .tags.has-addons
-          a.tag.is-primary href=search_by_tag_path(tag.permalink) #{tag.name}
-          span.tag #{tag.posts.count}
+      - cache tag do
+          div style='margin-right: 1rem;'
+            a.tag.is-link href=search_by_tag_path(tag.permalink) #{tag.name}
+            span.tag.is-warning #{tag.posts.count}
 - elsif @tag.present?
   h1.subtitle Showing posts by:
   span.tag.is-primary #{@tag.name}

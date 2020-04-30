@@ -1,7 +1,7 @@
 == render_tags(@post.tags)
-
-h1.title.is-1 = @post.title
-h1.subtitle == "By #{@post.user.name}"
-h1.subtitle = @post.created_at.strftime("%d %B, %Y")
-hr
-== @post.content
+- cache @post do
+  h1.title.is-1 = @post.title
+  h1.subtitle == "By #{@post.user.name}"
+  h1.subtitle = @post.created_at.strftime("%d %B, %Y")
+  hr
+  == @post.content
