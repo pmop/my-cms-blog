@@ -32,6 +32,19 @@ $link: $teal;
 	color: white;
 }
 
+.listing-header {
+	display: flex;
+	justify-content: space-between;
+}
+
+.listing-header>.tags>a.tag {
+	background-color: inherit !important;
+	border-radius: 0 !important;
+	color: $claret;
+	font-weight: 600;
+	border-bottom: 2px solid $claret;
+}
+
 .author {
 	color: $oxford;
 	font-weight: 600;
@@ -50,7 +63,7 @@ body {
 	background-color: #fff1e5 !important;
 }
 
-.is-post > hr {
+hr {
 	background-color: $dark;
 }
 

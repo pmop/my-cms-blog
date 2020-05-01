@@ -23,13 +23,7 @@ html
             div.navbar-menu id='navbarMenuHeroA'
               .navbar-end
                 a.navbar-item href=root_path Home
-                a.navbar-item About
-                span.navbar-item
-                  a.button.is-link.is-inverted
-                    span.icon
-                      img height="32" width="32" src="https://unpkg.com/simple-icons@v2/icons/github.svg"
-                    span GitHub
-
+                a.navbar-item target='_blank' href='https://pmop.github.com' About me
 
         - if user_signed_in?
           = render 'layouts/navbar'

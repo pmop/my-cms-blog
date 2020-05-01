@@ -4,15 +4,14 @@
     .column.is-6.container.is-centered
       img src='/octopus.svg' style='width: 5in; height: auto;'
 - else
-  .box
     - @posts.all.each do |post|
       - cache post do
-        .container
+        section.section.listing
           .columns
-            .column.is-four-fifths
-              == render_tags(post.tags)
-
-              h1.title.is-1 = post.title
+            .column.is-full
+              .listing-header
+                h1.title.is-1 = post.title
+                == render_tags(post.tags)
               h1.subtitle Posted #{post.created_at.strftime("%d %B, %Y")}
 
           hr
