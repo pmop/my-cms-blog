@@ -16,11 +16,11 @@ html
             .navbar-brand
               span.is-size-3
                 a.navbar-item href=root_path Dreams of Code
-              span.navbar-burger.burger data-taget='navbarMenuHeroA'
-                span
-                span
-                span
-            div.navbar-menu id='navbarMenuHeroA'
+              a.navbar-burger.burger role='button' aria-label='menu' aria-expanded='false' data-target='navbarMenuHero'
+                span aria-hidden='true'
+                span aria-hidden='true'
+                span aria-hidden='true'
+            div.navbar-menu id='navbarMenuHero'
               .navbar-end
                 a.navbar-item href=root_path Home
                 a.navbar-item target='_blank' href='https://pmop.github.com' About me
@@ -44,4 +44,29 @@ html
           $notification.parentNode.removeChild($notification);
         });
       });
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+      // Get all "navbar-burger" elements
+      const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+      // Check if there are any navbar burgers
+      if ($navbarBurgers.length > 0) {
+
+        // Add a click event on each of them
+        $navbarBurgers.forEach( el => {
+          el.addEventListener('click', el => {
+
+            // Get the target from the "data-target" attribute
+            const target = el.target.dataset.target;
+            const $target = document.getElementById(target);
+            console.log($target);
+
+            // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+            $target.classList.toggle('is-active');
+
+          });
+        });
+      }
+
     });

@@ -1,6 +1,7 @@
-== render_tags(@post.tags)
 - cache @post do
-  h1.title.is-1 = @post.title
+  .listing-header
+    h1.title.is-1 = @post.title
+    == render_tags(@post.tags)
   span
     span.subtitle Written by&nbsp;
     span.subtitle.author #{@post.user.name}&nbsp;
