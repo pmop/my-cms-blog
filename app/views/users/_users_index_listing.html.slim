@@ -17,7 +17,7 @@ table.table.is-hoverable.is-fullwidth
         td
           .field.has-addons
             = link_to 'Show', user, class:'control button is-small'
-            = link_to 'Edit', edit_user_registration_path(user), class:'control button is-small'
+            / = link_to 'Edit', edit_user_registration_path(user), class:'control button is-small'
 
             = link_to 'Destroy', user, data: { confirm: 'Are you sure?' }, method: :delete, class:'control button is-small is-danger'
         td

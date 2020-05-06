@@ -26,7 +26,7 @@ html
                 a.navbar-item target='_blank' href='https://pmop.github.com' About me
 
         - if user_signed_in?
-          = render 'layouts/navbar'
+          = render 'application/navbar'
         - if notice.present?
           .notification.is-warning
             button.delete

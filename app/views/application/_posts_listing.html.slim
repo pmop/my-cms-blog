@@ -15,7 +15,7 @@
               h1.subtitle Posted #{post.created_at.strftime("%d %B, %Y")}
 
           hr
-          == truncate(strip_tags(post.content.to_s), length: 300)
+          == post.summary
           br/
           .container style='display: flex; flex-direction: row-reverse; padding-top: 1rem;'
             = link_to 'Read post...', post, class: 'button is-medium is-outlined is-link'

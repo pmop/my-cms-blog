@@ -13,7 +13,7 @@ table.table.is-hoverable
       tr
         td = post.user.name
         td = post.title
-        td = post.permalink
+        td = truncate(post.permalink, length: 10)
         td
           .field.has-addons
             = link_to 'Show', post, class:'control is-white button is-small'
