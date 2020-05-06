@@ -1,0 +1,13 @@
+scss:
+  $claret: #990f3d;
+  .listing-tag {
+      background-color: inherit !important;
+      color: $claret !important;
+      font-weight: 600 !important;
+      border: 2px solid $claret !important;
+  }
+
+- unless tags.nil?
+  .tags
+    - tags.each do |tag|
+      a.tag.listing-tag.is-link href=search_by_tag_path(tag.permalink) #{tag.name}

@@ -1,6 +1,22 @@
-.container.is-fluid
-  .columns.is-centered
-    .column.is-full-mobile.is-9-desktop
-      .container.is-post
-        == render 'application/post'
+/ css:
+  .trix-content > div > a:hover {
+	background-color: transparent;
+    color: teal;
+	border-bottom: 2px solid teal;
+  }
+section.section
+  .container.is-fluid
+    .columns.is-centered
+      .column.is-full-mobile.is-9-desktop
+        .container.is-post
+          - cache @post do
+            .listing-header
+              h1.title.is-1 = @post.title
+              == render partial: 'tags/post_header', locals: { tags: @post.tags }
+            span
+              span.subtitle Written by&nbsp;
+              span.subtitle.author #{@post.user.name}&nbsp;
+              span.subtitle on #{@post.created_at.strftime("%d %B, %Y")}
+            hr
+            == @post.content
 
