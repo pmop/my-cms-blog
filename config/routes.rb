@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   root to: 'home#index'
   resources :posts, except: [:index]
 
+
   get 'tags/(/:permalink)', to: 'tags#index', as: :search_by_tag
   get '/users/:id', to: 'users#show', as: :user
   get 'dashboard', to: 'dashboard#index'

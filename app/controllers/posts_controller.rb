@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :set_post, only: [:edit, :update, :destroy]
   before_action :set_tags, only: [:new, :edit]
   before_action :set_user, only: [:create, :update]
   before_action :authenticate_user!, only: [:new, :edit, :update, :destroy]
@@ -11,6 +11,7 @@ class PostsController < ApplicationController
 
   # GET /posts/1
   def show
+    @post = Post.find_by(permalink: params[:id])
   end
 
   # GET /posts/new
