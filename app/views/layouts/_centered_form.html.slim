@@ -1,6 +1,16 @@
+- login_active = 'is-active' if current_page? new_user_session_path
+- register_active = 'is-active' if current_page? new_user_registration_path
 .container.is-fluid
   .columns.is-centered
     .column.is-5-tablet.is-4-desktop.is-4-widescreen
       section.section style='height: 90vh;'
         .box
+          .tabs.is-toggle.is-fullwidth
+            ul
+              li class="#{login_active}"
+                a href=new_user_session_path
+                  span Login
+              li class="#{register_active}"
+                a href=new_user_registration_path
+                  span Register
           == yield

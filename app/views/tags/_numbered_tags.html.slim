@@ -5,7 +5,8 @@
       - cache tag do
           div style='margin-right: 1rem;'
             a.tag.is-link href=search_by_tag_path(tag.permalink) #{tag.name}
-            span.tag.counter-tag #{tag.posts.count}
+            - current_user.present? && current_user.admin?
+              span.tag.counter-tag #{tag.posts.count}
 - elsif @tag.present?
   h1.subtitle Showing posts by:
   span.tag.is-primary #{@tag.name}

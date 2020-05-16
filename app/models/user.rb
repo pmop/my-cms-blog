@@ -16,4 +16,8 @@ class User < ApplicationRecord
   has_and_belongs_to_many :posts, dependent: :destroy
 
   has_one_attached :avatar
+
+  def set_default_role
+    self.role = :normal
+  end
 end

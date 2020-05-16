@@ -24,10 +24,12 @@ html
               .navbar-end
                 a.navbar-item href=root_path Home
                 - unless user_signed_in?
-                  a.navbar-item href=user_sign_in_path Log in
+                  a.navbar-item href=new_user_session_path Log in
+                - else
+                  a.navbar-item href=destroy_user_session_path(current_user) Log out
                 a.navbar-item target='_blank' href='https://pmop.github.com' About me
 
-        - if user_signed_in?
+        - if user_signed_in? && (current_user.admin? || current_user.moderator? || current_user.editor?)
           = render 'application/navbar'
         - if notice.present?
           .notification.is-warning

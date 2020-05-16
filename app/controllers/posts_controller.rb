@@ -11,7 +11,7 @@ class PostsController < ApplicationController
 
   # GET /posts/1
   def show
-    @post = Post.find_by(permalink: params[:id])
+    @post = Post.includes(:tags, :user).with_rich_text_content.find_by(permalink: params[:id])
   end
 
   # GET /posts/new
@@ -55,7 +55,8 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.update(hash)
-        format.html { redirect_to @post, notice: 'Post was successfully updated.' }
+        format.html { redirect_to post_path(@post.permalink),
+                      notice: 'Post was successfully updated.' }
       else
         format.html { render :edit }
       end

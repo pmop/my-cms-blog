@@ -34,6 +34,12 @@ $link: $teal;
 
 .listing-header {
 	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.listing-footer {
+	display: flex;
 	justify-content: space-between;
 }
 

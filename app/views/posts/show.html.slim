@@ -11,8 +11,9 @@ section.section
         .container.is-post
           - cache @post do
             .listing-header
-              h1.title.is-1 = @post.title
               == render partial: 'tags/post_header', locals: { tags: @post.tags }
+              h1.title.is-1 = @post.title.titleize
+              br
             span
               span.subtitle Written by&nbsp;
               span.subtitle.author #{@post.user.name}&nbsp;

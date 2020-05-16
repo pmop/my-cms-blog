@@ -9,11 +9,20 @@ section.section.listing
   == post.summary
   br/
   .container style='display: flex; flex-direction: row-reverse; padding-top: 1rem;'
-    = link_to 'Read post...', post_path(post.permalink), class: 'button is-medium is-outlined is-link'
 
   br
   br
-  h1.subtitle Posted #{post.created_at.strftime("%d %B, %Y")}
+
+  - if current_user.present?
+    .buttons
+      - if can? :destrou, post
+        = link_to 'Delete', post_path(post), method: :delete, class: 'button is-small is-danger'
+      - if can? :update, post
+        = link_to 'Edit', edit_post_path(post), class: 'button is-small is-link'
+  .listing-footer
+    h1.subtitle Posted #{post.created_at.strftime("%d %B, %Y")}
+
+    = link_to 'Read post...', post_path(post.permalink), class: 'button is-medium is-outlined is-link'
   hr
   br
   br
