@@ -23,6 +23,8 @@ html
             div.navbar-menu id='navbarMenuHero'
               .navbar-end
                 a.navbar-item href=root_path Home
+                - unless user_signed_in?
+                  a.navbar-item href=user_sign_in_path Log in
                 a.navbar-item target='_blank' href='https://pmop.github.com' About me
 
         - if user_signed_in?

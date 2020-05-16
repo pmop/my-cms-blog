@@ -1,13 +1,14 @@
-nav.navbar.is-dark.has-shadow role='navigation' aria-label='main navigation'
+nav.navbar role='navigation' aria-label='main navigation'
     .navbar_start
       .navbar_item
         .buttons style='margin-top: 12px; margin-left: 1rem;'
-          - if @post.present? and @post.id.present?
+          - if @post.present? && @post.id.present? && can?(:update, @post)
             => link_to 'Edit Post', edit_post_path(@post),
               class: 'navbar-item button is-small is-link'
 
-          => link_to('New Post', new_post_url,
-              class: 'navbar-item button is-small is-success')
+          - if current_user.admin? || current_user.editor?
+            => link_to('New Post', new_post_url,
+                class: 'navbar-item button is-small is-success')
     .navbar-end
       .navbar-item
         .buttons.has-addons
@@ -18,8 +19,8 @@ nav.navbar.is-dark.has-shadow role='navigation' aria-label='main navigation'
             = link_to new_user_session_path, class: 'navbar-item button is-success is-outlined is-small' do
               span Sign in
 
-          - if user_signed_in?
+          - if current_user.admin?
             = link_to dashboard_path, class:'button is-link is-rounded is-small' do
               span Dashboard
-            = link_to destroy_user_session_path, method: :delete,  class: 'navbar-item button is-danger is-rounded is-small' do
-              span Sign out
+          = link_to destroy_user_session_path, method: :delete,  class: 'navbar-item button is-danger is-rounded is-small' do
+            span Sign out
