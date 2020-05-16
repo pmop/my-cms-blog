@@ -6,7 +6,6 @@ section.section.listing
         == render partial: 'tags/post_header',
           locals: {tags: post.tags}
 
-  hr
   == post.summary
   br/
   .container style='display: flex; flex-direction: row-reverse; padding-top: 1rem;'
@@ -14,7 +13,6 @@ section.section.listing
 
   br
   br
-  hr
   h1.subtitle Posted #{post.created_at.strftime("%d %B, %Y")}
   hr
   br
