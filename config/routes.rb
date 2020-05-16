@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   get 'dashboard/index'
-  devise_for :users, skip: [:registrations]
+  devise_for :users
   root to: 'home#index'
   resources :posts, except: [:index]
 
