@@ -10,14 +10,13 @@ class Ability
       if user.admin?
         can :manage, :all
       end
-      # if user.normal? || user.editor? || user.moderator?
-      #  can :create, Comment
-      #  can :update, Comment, {user_id: user.id}
-      #  if user.moderator?
-      #   can :update, Comment
-      #   can :destroy, Comment
-      #  end
-      # end
+      if user.normal? || user.editor? || user.moderator?
+        can [:read, :create], Comment
+        can :update, Comment, {user_id: user.id}
+        if user.moderator?
+          can [:update, :destroy], Comment
+        end
+      end
       if user.editor?
         can :create, Post
         can :update, Post, user_id: user.id

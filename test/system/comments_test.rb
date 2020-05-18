@@ -14,8 +14,7 @@ class CommentsTest < ApplicationSystemTestCase
     visit comments_url
     click_on "New Comment"
 
-    fill_in "Comment area", with: @comment.comment_area_id
-    fill_in "Content", with: @comment.content
+    fill_in "Post", with: @comment.post_id
     fill_in "User", with: @comment.user_id
     click_on "Create Comment"
 
@@ -27,8 +26,7 @@ class CommentsTest < ApplicationSystemTestCase
     visit comments_url
     click_on "Edit", match: :first
 
-    fill_in "Comment area", with: @comment.comment_area_id
-    fill_in "Content", with: @comment.content
+    fill_in "Post", with: @comment.post_id
     fill_in "User", with: @comment.user_id
     click_on "Update Comment"
 

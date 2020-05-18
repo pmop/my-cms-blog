@@ -1,23 +1,88 @@
-/ css:
-  .trix-content > div > a:hover {
-	background-color: transparent;
-    color: teal;
-	border-bottom: 2px solid teal;
-  }
-section.section
-  .container.is-fluid
-    .columns.is-centered
-      .column.is-full-mobile.is-9-desktop
-        .container.is-post
-          - cache @post do
-            .listing-header
-              == render partial: 'tags/post_header', locals: { tags: @post.tags }
-              h1.title.is-1 = @post.title.titleize
-              br
-            span
-              span.subtitle Written by&nbsp;
-              span.subtitle.author #{@post.user.name}&nbsp;
-              span.subtitle on #{@post.created_at.strftime("%d %B, %Y")}
-            hr
-            == @post.content
+.content
+  section.section
+    .container.is-fluid
+      .columns.is-centered
+        .column.is-full-mobile.is-6-desktop
+          .container.is-post
+            - cache @post do
+              .listing-header
+                == render partial: 'tags/post_header', locals: { tags: @post.tags }
+                h1.title.is-1 = @post.title.titleize
+                br
+              span
+                span.subtitle Written by&nbsp;
+                span.subtitle.author #{@post.user.name}&nbsp;
+                span.subtitle on #{@post.created_at.strftime("%d %B, %Y")}
+              hr
+              == @post.content
+  section.section
+    .container.is-fluid
+      .columns.is-centered
+        .column.is-full-mobile.is-7-desktop
+          hr
+          a1.subtitle.is-6 Comments
+          br
+          br
+          / Comment form
+          - if current_user.present?
+            .box
+              = form_for [@post, @comment] do |form|
+                .form-inputs
+                  = form.rich_text_area :content
+                .form-actions
+                  = form.button :submit, class: 'button is-primary is-small' do
+                    span Add Comment
+          - else
+            .container.has-text-centered
+              h1.is-4 #{link_to 'Register', new_user_registration_url, class: 'is-link'} and start commenting now!
 
+          / Render comments
+          - unless @post.comments.empty?
+            br
+
+
+            .tabs.is-centered.is-fullwidth.is-toggle
+              ul
+                li
+                  a
+                    span.fa.fa-arrow-up.fa-fw
+                    span &nbsp;Newest
+                li
+                  a
+                    span.fa.fa-hourglass-end.fa-fw
+                    span &nbsp;Oldest
+                li
+                  a
+                    span.fa.fa-heart.fa-fw
+                    span &nbsp;Most liked
+
+            .box
+              - @post.comments.each do |comment|
+                article class="media"
+                  figure class="media-left"
+                    p class="image is-64x64"
+                      img.lazyload data-src="#{polymorphic_url(comment.user.avatar.variant(resize_to_fill: [64, 64]))}"
+
+                  div class="media-content"
+                    div class="content"
+                      div
+                        span #{comment.user.name} commented on&nbsp;
+                        span
+                          = time_tag Date.today, datetime: comment.created_at.strftime("%d %B, %Y")
+                        br
+                        == comment.content
+                    nav class="level is-mobile"
+                      div class="level-left"
+                        a class="level-item"
+                          span class="icon is-small"
+                            i class="fa fa-reply"
+                        a class="level-item"
+                          span class="icon is-small"
+                            i class="fa fa-retweet"
+                        a class="level-item"
+                          span class="icon is-small"
+                            i class="fa fa-heart"
+
+                  div class="media-right"
+                    -if can?(:destroy, comment)
+                      button class="delete"

@@ -10,4 +10,4 @@ scss:
 - unless tags.nil?
   .tags
     - tags.each do |tag|
-      a.tag.listing-tag.is-link href=search_by_tag_path(tag.permalink) #{tag.name}
+      a.tag.listing-tag.is-link href=posts_tags_path(tag: tag.permalink) #{tag.name}
