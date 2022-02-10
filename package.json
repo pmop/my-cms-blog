@@ -10,7 +10,7 @@
     "bulma-tagsinput": "^2.0.0",
     "croppie": "^2.6.4",
     "lazysizes": "^5.2.0",
-    "node-sass": "^4.14.1",
+    "node-sass": "^7.0.0",
     "trix": "^1.0.0",
     "turbolinks": "^5.2.0"
   },
