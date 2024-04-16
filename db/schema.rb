@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_06_060120) do
+ActiveRecord::Schema.define(version: 2020_05_06_092926) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,34 +46,13 @@ ActiveRecord::Schema.define(version: 2020_05_06_060120) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
-  create_table "comment_areas", force: :cascade do |t|
-    t.integer "comments_id"
-    t.integer "post_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["comments_id"], name: "index_comment_areas_on_comments_id"
-    t.index ["post_id"], name: "index_comment_areas_on_post_id"
-  end
-
-  create_table "comments", force: :cascade do |t|
-    t.integer "comment_area_id", null: false
-    t.integer "user_id", null: false
-    t.text "content"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["comment_area_id"], name: "index_comments_on_comment_area_id"
-    t.index ["user_id"], name: "index_comments_on_user_id"
-  end
-
   create_table "posts", force: :cascade do |t|
     t.integer "user_id", null: false
-    t.integer "comment_area_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "title", limit: 255
     t.string "permalink", limit: 255
     t.text "summary"
-    t.index ["comment_area_id"], name: "index_posts_on_comment_area_id"
     t.index ["permalink"], name: "index_posts_on_permalink"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
@@ -118,11 +97,6 @@ ActiveRecord::Schema.define(version: 2020_05_06_060120) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "comment_areas", "comments", column: "comments_id"
-  add_foreign_key "comment_areas", "posts"
-  add_foreign_key "comments", "comment_areas"
-  add_foreign_key "comments", "users"
-  add_foreign_key "posts", "comment_areas"
   add_foreign_key "posts", "users"
   add_foreign_key "users", "posts", column: "posts_id"
 end

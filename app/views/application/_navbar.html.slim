@@ -19,7 +19,7 @@ nav.navbar.is-dark.has-shadow role='navigation' aria-label='main navigation'
               span Sign in
 
           - if user_signed_in?
-            = link_to posts_path, class:'button is-link is-rounded is-small' do
+            = link_to dashboard_path, class:'button is-link is-rounded is-small' do
               span Dashboard
             = link_to destroy_user_session_path, method: :delete,  class: 'navbar-item button is-danger is-rounded is-small' do
               span Sign out

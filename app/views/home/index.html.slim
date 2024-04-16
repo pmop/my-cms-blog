@@ -8,6 +8,7 @@
             img src='/octopus.svg' style='width: 5in; height: auto;'
       - else
           - @posts.all.each do |p|
-            == render partial: 'posts/post_listing', locals: { post: p }
+            - cache p do
+              == render partial: 'posts/post_listing', locals: { post: p }
     .column.is-3
       == render 'tags/numbered_tags'
