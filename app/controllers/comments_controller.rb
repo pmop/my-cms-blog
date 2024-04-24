@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class CommentsController < ApplicationController
-  before_action :set_comment, only: %i[edit show update destroy ]
+  before_action :set_comment, only: %i[edit show update destroy]
   before_action :set_post, except: [:index]
   before_action :authenticate_user!
 
@@ -12,24 +14,23 @@ class CommentsController < ApplicationController
   # Gets all comments. From post nested resource
   def show
     # GET /posts/1/comments/
-    if @post.present?
-      @comments = @post.comments.includes(:user).with_rich_text_content
-    end
+    return unless @post.present?
+
+    @comments = @post.comments.includes(:user).with_rich_text_content
   end
 
   # New comment. From post nested resource
   def new
     # GET /posts/1/comments/new
-    if @post.present?
-      @comment = Comment.new
-      @comment.post = @post
-    end
+    return unless @post.present?
+
+    @comment = Comment.new
+    @comment.post = @post
   end
 
   # GET /comments/1/edit
   # Edit comment. From post nested resource
-  def edit
-  end
+  def edit; end
 
   # POST /comments
   # POST /comments.json
@@ -75,17 +76,18 @@ class CommentsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_comment
-      @comment = Comment.find(params[:id])
-    end
 
-    def set_post
-      @post = Post.find(params[:post_id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_comment
+    @comment = Comment.find(params[:id])
+  end
 
-    # Only allow a list of trusted parameters through.
-    def comment_params
-      params.require(:comment).permit(:content)
-    end
+  def set_post
+    @post = Post.find(params[:post_id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def comment_params
+    params.require(:comment).permit(:content)
+  end
 end

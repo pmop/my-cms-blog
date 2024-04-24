@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: %i[show edit update destroy]
   before_action :authenticate_user!
 
   # GET /users
@@ -8,8 +10,7 @@ class UsersController < ApplicationController
   end
 
   # GET /users/1
-  def show
-  end
+  def show; end
 
   # GET /users/new
   def new
@@ -17,8 +18,7 @@ class UsersController < ApplicationController
   end
 
   # GET /users/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /users
   def create
@@ -53,17 +53,18 @@ class UsersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_user
-      @user = current_user
-    end
 
-    # Only allow a list of trusted parameters through.
-    def user_params
-      params.require(:user).permit(:email, :name, :password)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_user
+    @user = current_user
+  end
 
-    def avatar_params
-      params.require(:user).permit(:avatar)
-    end
+  # Only allow a list of trusted parameters through.
+  def user_params
+    params.require(:user).permit(:email, :name, :password)
+  end
+
+  def avatar_params
+    params.require(:user).permit(:avatar)
+  end
 end

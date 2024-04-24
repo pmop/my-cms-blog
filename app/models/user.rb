@@ -1,7 +1,9 @@
-class User < ApplicationRecord
-  enum role: [:normal, :editor, :moderator, :admin]
+# frozen_string_literal: true
 
-  after_initialize :set_default_role, :if => :new_record?
+class User < ApplicationRecord
+  enum role: %i[normal editor moderator admin]
+
+  after_initialize :set_default_role, if: :new_record?
 
   # Guest is not technically a role
   def guest?

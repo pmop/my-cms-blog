@@ -6,22 +6,19 @@ class Ability
   def initialize(user)
     can :read, Post
     # can :read, Comment
-    if user.present?
-      if user.admin?
-        can :manage, :all
-      end
-      if user.normal? || user.editor? || user.moderator?
-        can [:read, :create], Comment
-        can :update, Comment, {user_id: user.id}
-        if user.moderator?
-          can [:update, :destroy], Comment
-        end
-      end
-      if user.editor?
-        can :create, Post
-        can :update, Post, user_id: user.id
-      end
+    return unless user.present?
+
+    can :manage, :all if user.admin?
+    if user.normal? || user.editor? || user.moderator?
+      can %i[read create], Comment
+      can :update, Comment, { user_id: user.id }
+      can %i[update destroy], Comment if user.moderator?
     end
+    return unless user.editor?
+
+    can :create, Post
+    can :update, Post, user_id: user.id
+
     # Define abilities for the passed in user here. For example:
     #
     #
