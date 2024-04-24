@@ -37,3 +37,4 @@ yarn-debug.log*
 
 .env
 ./config/secrets/*
+cms_database_*
