@@ -12,8 +12,6 @@ gem 'sqlite3', '~> 1.7', '>= 1.7.3'
 # gem 'pg'
 # Use Puma as the app server
 gem 'puma', '~>6.4.2'
-# Use SCSS for stylesheets
-gem 'sass-rails', '>= 6'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem 'turbolinks', '~> 5'
@@ -59,6 +57,7 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
+# SCSS/CSS Framework
 gem 'bulma-rails', '~> 1.0.0'
 
 gem 'simple_form', '~> 5.0', '>= 5.0.2'
@@ -72,3 +71,9 @@ gem 'image_processing'
 gem "google-cloud-storage", "~> 1.11", require: false
 
 gem 'cancancan'
+
+# SCSS/SASS processing
+gem "dartsass-rails", "~> 0.5.0"
+
+gem 'sprockets', '~> 4.0'
+gem 'sprockets-rails', :require => 'sprockets/railtie'

@@ -23,12 +23,14 @@ $wasabi: #96cc28;
 $candy: #ff7faa;
 $crimson: #cc0000;
 $link: $teal;
+$dark-gray: #A9A9A9;
+
 @import 'bulma';
 @import "./actiontext.scss";
 @import 'bulma-tagsinput.min';
 
 .footer {
-	background-color: $grey-dark !important;
+	background-color: $dark-gray !important;
 	color: white;
 }
 
@@ -49,7 +51,7 @@ $link: $teal;
 }
 
 .counter-tag {
-	background-color: $grey-dark !important;
+	background-color: $dark-gray !important;
 	color: white !important;
 }
 
@@ -62,7 +64,7 @@ body {
 }
 
 hr {
-	background-color: $dark;
+	background-color: black;
 }
 
 .img-placeholder {
