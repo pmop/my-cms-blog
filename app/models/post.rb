@@ -1,5 +1,6 @@
-class Post < ApplicationRecord
+# frozen_string_literal: true
 
+class Post < ApplicationRecord
   include ActionView::Helpers::TextHelper
   include ActionView::Helpers::SanitizeHelper
 
@@ -11,6 +12,6 @@ class Post < ApplicationRecord
   has_many :comments
 
   before_save do
-    self.summary = truncate(strip_tags(self.content.to_s), length: 300)
+    self.summary = truncate(strip_tags(content.to_s), length: 300)
   end
 end
