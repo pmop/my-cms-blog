@@ -44,6 +44,9 @@ group :development do
   gem 'guard', '~> 2.16', '>= 2.16.2'
   gem 'guard-livereload', '~> 2.5', '>= 2.5.2', require: false
   gem 'better_errors', '~> 2.6'
+  gem 'rubocop', '~> 1.63', '>= 1.63.3', require: false
+  gem 'rubocop-rails', '~> 2.24', '>= 2.24.1', require: false
+  gem 'rubocop-performance', '~> 1.21'
 end
 
 group :test do
