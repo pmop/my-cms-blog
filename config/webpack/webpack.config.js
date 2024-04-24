@@ -10,18 +10,7 @@ module.exports = {
   mode: "production",
   devtool: "source-map",
   entry: {
-    application: [
-      './app/javascript/application.js',
-      //'./app/assets/stylesheets/application.scss',
-      //'./app/assets/stylesheets/home.scss',
-      //'./app/assets/stylesheets/tags.scss',
-      //'./app/assets/stylesheets/scaffolds.scss',
-      //'./app/assets/stylesheets/dashboard.scss',
-      //'./app/assets/stylesheets/actiontext.scss',
-      //'./app/assets/stylesheets/posts.scss',
-      //'./app/assets/stylesheets/users.scss',
-      //'./app/assets/stylesheets/comments.scss',
-    ]
+    application: [ './app/javascript/application.js' ]
   },
   module: {
     rules: [
@@ -41,10 +30,8 @@ module.exports = {
     hashDigestLength: 64,
     filename: "[name].js",
     chunkFilename: "[name]-[contenthash].digested.js",
-    //sourceMapFilename: "[file].map",
     sourceMapFilename: "[file]-[fullhash].map",
     chunkFormat: "module",
-    //path: path.resolve(__dirname, "app/assets/builds"),
     path: path.resolve(__dirname, '..', '..', 'app/assets/builds'),
   },
   plugins: [
