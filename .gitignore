@@ -38,3 +38,6 @@ yarn-debug.log*
 .env
 ./config/secrets/*
 cms_database_*
+
+/app/assets/builds/*
+!/app/assets/builds/.keep

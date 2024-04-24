@@ -6,7 +6,6 @@
     "@rails/actiontext": "^6.0.2-2",
     "@rails/activestorage": "^6.0.0",
     "@rails/ujs": "^6.0.0",
-    "@rails/webpacker": "4.2.2",
     "bulma-tagsinput": "^2.0.0",
     "croppie": "^2.6.4",
     "lazysizes": "^5.2.0",
@@ -14,8 +13,7 @@
     "trix": "^1.0.0",
     "turbolinks": "^5.2.0"
   },
+  "build": "webpack --config ./config/webpack/webpack.config.js",
   "version": "0.1.0",
-  "devDependencies": {
-    "webpack-dev-server": "^3.10.3"
-  }
+  "devDependencies": {}
 }

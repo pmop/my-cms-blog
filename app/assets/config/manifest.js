@@ -2,3 +2,4 @@
 //= link_directory ../stylesheets .css
 //= link croppie/croppie.js
 //= link croppie.css
+//= link_tree ../builds
