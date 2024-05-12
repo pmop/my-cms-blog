@@ -2,9 +2,11 @@ class CreateTags < ActiveRecord::Migration[6.0]
   def change
     create_table :tags do |t|
       t.string :name, limit: 30
-      t.references :posts, null: true, foreign_key: true
+      t.string :permalink, limit: 255
 
       t.timestamps
     end
+
+    add_index :tags, :permalink, unique: true
   end
 end

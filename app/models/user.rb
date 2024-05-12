@@ -1,9 +1,26 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  #devise :database_authenticatable, :registerable,
+  #       :recoverable, :rememberable, :validatable
+
+
+  devise :database_authenticatable, :registerable,
+    :timeoutable, :recoverable, :lockable, :confirmable,
+    unlock_strategy: :time, lock_strategy: :none,
+    allow_unconfirmed_access_for: 2.weeks, reconfirmable: true
+
+
+
   enum role: %i[normal editor moderator admin]
 
   after_initialize :set_default_role, if: :new_record?
+
+  def set_default_role
+    self.role = :normal
+  end
 
   # Guest is not technically a role
   def guest?
@@ -11,15 +28,8 @@ class User < ApplicationRecord
     persisted?
   end
 
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
-  has_and_belongs_to_many :posts, dependent: :destroy
+
+  has_many :posts
 
   has_one_attached :avatar
-
-  def set_default_role
-    self.role = :normal
-  end
 end

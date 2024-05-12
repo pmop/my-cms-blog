@@ -44,25 +44,21 @@ ActiveRecord::Schema[7.1].define(version: 2020_05_17_213559) do
 
   create_table "comments", force: :cascade do |t|
     t.integer "post_id", null: false
-    t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["post_id"], name: "index_comments_on_post_id"
-    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "posts", force: :cascade do |t|
     t.integer "user_id", null: false
-    t.integer "tags_id", null: false
     t.text "content"
     t.string "content_type", limit: 40
+    t.string "title", limit: 255
+    t.text "summary"
+    t.string "permalink", limit: 255
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "title", limit: 255
-    t.string "permalink", limit: 255
-    t.text "summary"
     t.index ["permalink"], name: "index_posts_on_permalink"
-    t.index ["tags_id"], name: "index_posts_on_tags_id"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
@@ -84,35 +80,31 @@ ActiveRecord::Schema[7.1].define(version: 2020_05_17_213559) do
 
   create_table "tags", force: :cascade do |t|
     t.string "name", limit: 30
-    t.integer "posts_id"
+    t.string "permalink", limit: 255
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "permalink", limit: 255
-    t.index ["permalink"], name: "index_tags_on_permalink"
-    t.index ["posts_id"], name: "index_tags_on_posts_id"
+    t.index ["permalink"], name: "index_tags_on_permalink", unique: true
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "name", limit: 50, null: false
-    t.integer "posts_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "email", limit: 254, default: "", null: false
-    t.string "encrypted_password", default: "", null: false
+    t.string "email", limit: 254, null: false
+    t.string "encrypted_password", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at", precision: nil
     t.datetime "remember_created_at", precision: nil
-    t.integer "role"
+    t.string "name", limit: 50, null: false
+    t.string "confirmation_token"
+    t.datetime "confirmed_at", precision: nil
+    t.datetime "confirmation_sent_at", precision: nil
+    t.string "unconfirmed_email"
+    t.integer "role", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["posts_id"], name: "index_users_on_posts_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "comments", "posts"
-  add_foreign_key "comments", "users"
-  add_foreign_key "posts", "tags", column: "tags_id"
   add_foreign_key "posts", "users"
-  add_foreign_key "tags", "posts", column: "posts_id"
-  add_foreign_key "users", "posts", column: "posts_id"
 end

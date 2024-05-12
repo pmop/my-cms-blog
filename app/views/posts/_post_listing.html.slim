@@ -3,8 +3,8 @@ section.section.listing
     .column.is-full
       .listing-header
         h1.title.is-1 = post.title
-        == render partial: 'tags/post_header',
-          locals: {tags: post.tags}
+        / == render partial: 'tags/post_header',
+          /locals: {tags: post.tags}
 
   == post.summary
   br/

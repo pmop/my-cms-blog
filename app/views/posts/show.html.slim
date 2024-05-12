@@ -6,7 +6,7 @@
           .container.is-post
             - cache @post do
               .listing-header
-                == render partial: 'tags/post_header', locals: { tags: @post.tags }
+                / == render partial: 'tags/post_header', locals: { tags: @post.tags }
                 h1.title.is-1 = @post.title.titleize
                 br
               span
