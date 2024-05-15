@@ -15,7 +15,7 @@ section.section.listing
 
   - if current_user.present?
     .buttons
-      - if can? :destrou, post
+      - if can? :destroy, post
         = link_to 'Delete', post_path(post), method: :delete, class: 'button is-small is-danger'
       - if can? :update, post
         = link_to 'Edit', edit_post_path(post), class: 'button is-small is-link'

@@ -9,7 +9,7 @@ class User < ApplicationRecord
 
   devise :database_authenticatable, :registerable,
     :timeoutable, :recoverable, :lockable, :confirmable,
-    unlock_strategy: :time, lock_strategy: :none,
+    unlock_strategy: :time, lock_strategy: :failed_attempts,
     allow_unconfirmed_access_for: 2.weeks, reconfirmable: true
 
 

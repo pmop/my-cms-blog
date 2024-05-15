@@ -31,9 +31,11 @@ if ENV['RAILS_ENV'] == 'development'
 
   if admin.nil?
     admin = User.create_or_find_by(
-      name: 'Admin',
-      email: 'admin@test.com',
-      password: '123456', password_confirmation: '123456'
+      name:                  'Admin',
+      email:                 'admin@test.com',
+      password:              '123456',
+	  password_confirmation: '123456',
+	  role:                  'admin'
     )
     admin.confirm
   end
