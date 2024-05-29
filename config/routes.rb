@@ -8,11 +8,7 @@ Rails.application.routes.draw do
     resource :comments, shallow: true
   end
 
-  resource :tags do
-    member do
-      get 'posts'
-    end
-  end
+  resource :tags
 
   get '/users/:id', to: 'users#show', as: :user
   get 'dashboard', to: 'dashboard#index'
