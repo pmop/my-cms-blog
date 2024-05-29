@@ -4,7 +4,6 @@ class Post < ApplicationRecord
   include ActionView::Helpers::TextHelper
   include ActionView::Helpers::SanitizeHelper
 
-  scope :newest, -> { order(created_at: :DESC) }
   belongs_to :user
   has_rich_text :content
 

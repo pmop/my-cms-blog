@@ -9,13 +9,12 @@ class PostsController < ApplicationController
 
   # GET /posts
   def index
-    @posts = Post.all.with_rich_text_content
+    @posts = Post.with_rich_text_content.first(10)
   end
 
   # GET /posts/1
   def show
     @post = Post.includes(:user).with_rich_text_content.find_by(permalink: params[:id])
-    @comment = Comment.new
   end
 
   # GET /posts/new

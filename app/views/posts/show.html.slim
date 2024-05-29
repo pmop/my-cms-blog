@@ -15,7 +15,7 @@
                 span.subtitle #{@post.created_at.strftime("%d %B, %Y")}
               hr
               == @post.content
-  section.section
+  / section.section
     .container.is-fluid
       .columns.is-centered
         .column.is-full-mobile.is-7-desktop
@@ -37,11 +37,11 @@
               h1.is-4 #{link_to 'Register', new_user_registration_url, class: 'is-link'} and start commenting now!
 
           / Render comments
-          - unless @post.comments.empty?
+          / - unless @post.comments.empty?
             br
 
 
-            .tabs.is-centered.is-fullwidth.is-toggle
+           /  .tabs.is-centered.is-fullwidth.is-toggle
               ul
                 li
                   a
@@ -56,14 +56,14 @@
                     span.fa.fa-heart.fa-fw
                     span &nbsp;Most liked
 
-            .box
+            / .box
               - @post.comments.each do |comment|
                 article class="media"
                   figure class="media-left"
                     p class="image is-64x64"
                       img.lazyload data-src="#{polymorphic_url(comment.user.avatar.variant(resize_to_fill: [64, 64]))}"
 
-                  div class="media-content"
+                  / div class="media-content"
                     div class="content"
                       div
                         span #{comment.user.name} commented on&nbsp;
@@ -83,6 +83,6 @@
                           span class="icon is-small"
                             i class="fa fa-heart"
 
-                  div class="media-right"
+                  / div class="media-right"
                     -if can?(:destroy, comment)
                       button class="delete"

@@ -2,12 +2,12 @@
   .columns
     .column.is-9
       - if @posts.nil? or @posts.empty?
-        h1.is-size-2.has-text-centered Welp! We don't have any articles yet!
+        h1.is-size-2.has-text-centered No articles found!
         .columns
           .column.is-6.container.is-centered
             img src='/octopus.svg' style='width: 5in; height: auto;'
       - else
-          - @posts.all.each do |p|
+          - @posts.each do |p|
             - cache p do
               == render partial: 'posts/post_listing', locals: { post: p }
     .column.is-3

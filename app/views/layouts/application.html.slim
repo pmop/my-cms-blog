@@ -10,20 +10,22 @@ html
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'https://cdn.jsdelivr.net/npm/vanilla-lazyload@16.0.0/dist/lazyload.min.js'
     script type='text/javascript' src="https://cdn.jsdelivr.net/npm/bulma-tagsinput@2.0.0/dist/js/bulma-tagsinput.min.js"
+  header
+    == render 'application/global_navbar'
   body
-    .hero.is-fullheight.is-fullwidth
-      .hero-head
-        = render 'application/global_navbar'
-        - if user_signed_in? && (current_user.admin? || current_user.moderator? || current_user.editor?)
-          = render 'application/special_navbar'
-        - if notice.present?
-          .notification.is-warning
-            button.delete
-            p = notice
-      .hero-body
-        == yield
-      .hero-foot
-        == render 'application/footer'
+    == yield
+  footer
+    == render 'application/footer'
+
+    / .hero.is-fullheight.is-fullwidth
+    /   .hero-head
+    /     = render 'application/global_navbar'
+    /     - if user_signed_in? && (current_user.admin? || current_user.moderator? || current_user.editor?)
+    /       = render 'application/special_navbar'
+    /     - if notice.present?
+    /       .notification.is-warning
+    /         button.delete
+    /         p = notice
 
   javascript:
     document.addEventListener('DOMContentLoaded', () => {
