@@ -28,6 +28,7 @@ html
     /         p = notice
 
   javascript:
+    //Add event listener to be able to quit the notification
     document.addEventListener('DOMContentLoaded', () => {
       (document.querySelectorAll('.notification .delete') || []).forEach(($delete) => {
         $notification = $delete.parentNode;
@@ -36,7 +37,7 @@ html
         });
       });
     });
-
+    // Add Click event to Nav Burgers
     document.addEventListener('DOMContentLoaded', () => {
       // Get all "navbar-burger" elements
       const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);

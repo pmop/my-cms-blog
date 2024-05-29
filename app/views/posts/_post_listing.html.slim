@@ -3,7 +3,7 @@ section.section.listing
     .column.is-full
       .listing-header
         div.block
-          h1.title.link href=post_path(post.permalink) = post.title
+          h1.title.link href=post_path(post.permalink) == sanitize(post.title)
         div.block
           h3.subtitle = post.created_at.strftime("%d %B, %Y")
         / == render partial: 'tags/post_header',
