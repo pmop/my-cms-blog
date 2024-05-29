@@ -8,24 +8,20 @@ html
     = stylesheet_link_tag "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     = stylesheet_link_tag "actiontext", "data-turbo-track": "reload"
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
-    = javascript_include_tag 'https://cdn.jsdelivr.net/npm/vanilla-lazyload@16.0.0/dist/lazyload.min.js'
-    script type='text/javascript' src="https://cdn.jsdelivr.net/npm/bulma-tagsinput@2.0.0/dist/js/bulma-tagsinput.min.js"
-  header
+    / = javascript_include_tag 'https://cdn.jsdelivr.net/npm/vanilla-lazyload@16.0.0/dist/lazyload.min.js'
+    / script type='text/javascript' src="https://cdn.jsdelivr.net/npm/bulma-tagsinput@2.0.0/dist/js/bulma-tagsinput.min.js"
+  header.mb-4
     == render 'application/global_navbar'
+    - if user_signed_in? && (current_user.admin? || current_user.moderator? || current_user.editor?)
+      = render 'application/special_navbar'
+    - if notice.present?
+      .notification.is-warning
+        button.delete
+        p = notice
   body
     == yield
-  footer
+  footer.footer
     == render 'application/footer'
-
-    / .hero.is-fullheight.is-fullwidth
-    /   .hero-head
-    /     = render 'application/global_navbar'
-    /     - if user_signed_in? && (current_user.admin? || current_user.moderator? || current_user.editor?)
-    /       = render 'application/special_navbar'
-    /     - if notice.present?
-    /       .notification.is-warning
-    /         button.delete
-    /         p = notice
 
   javascript:
     //Add event listener to be able to quit the notification

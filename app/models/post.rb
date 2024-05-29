@@ -7,7 +7,8 @@ class Post < ApplicationRecord
   belongs_to :user
   has_rich_text :content
 
-  has_many :comments
+  has_many :posts_tags
+  has_many :tags, through: :posts_tags
 
   before_save do
     self.summary = truncate(strip_tags(content.to_s), length: 300)

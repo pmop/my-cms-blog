@@ -5,11 +5,25 @@ class PostsController < ApplicationController
   before_action :set_user, only: %i[create update]
   before_action :authenticate_user!, only: %i[new edit update destroy]
 
-  def search; end
+  # GET /posts/search
+  def search
+    tag_permalink = params.permit(:tag)[:tag]&.strip.first(25).tr('^[a-z]', '')
+
+    if tag_permalink
+      poststag_by_tag = PostsTag.by_tag_permalink_include_post_tag_name(tag_permalink)
+        .limit(10)
+
+      @tag_name = poststag_by_tag[0][:tag_name]
+      @posts = poststag_by_tag.map(&:post)
+
+      render :index
+    end
+  end
 
   # GET /posts
   def index
-    @posts = Post.with_rich_text_content.first(10)
+    @tags = Tag.all
+    @posts = Post.with_rich_text_content.first(posts_limit)
   end
 
   # GET /posts/1
@@ -86,5 +100,17 @@ class PostsController < ApplicationController
 
   def search_params
     params.permit(:permalink)
+  end
+
+  def posts_by_tag(tag)
+    Post
+  end
+
+  def posts_limit
+    10
+  end
+
+  def more_than_10_posts?
+    return @posts.present? && @posts.first.id > 10
   end
 end

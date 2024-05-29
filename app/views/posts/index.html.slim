@@ -1,38 +1,15 @@
-.hero.is-fullheight.is-fullwidth.is-primary
-  .hero-body
-    section.section
-      .container.is-fluid
-        .panel style='background-color: white;'
-          .panel-heading Listing posts
-          table.table.is-hoverable.is-fullwidth
-            thead
-              tr
-                th User
-                th Title
-                th Tags
-                th Permalink
-                th
-                th
-                th
-
-            tbody
-              - @posts.each do |post|
-                tr
-                  td = post.user.name
-                  td = post.title
-                  td
-                    - post.tags.each do |tag|
-                        .tag.is-link.is-rounded = tag.name
-                  td = post.permalink
-                  td
-                    .field.has-addons
-                      = link_to 'Show', post, class:'control button is-small '
-                      = link_to 'Edit', edit_post_path(post), class:'control button is-small '
-
-                      = link_to 'Destroy', post, data: { confirm: 'Are you sure?' }, method: :delete, class:'control button is-danger is-small '
-                  td
-                  td
-
-          hr
-          .panel-block
-            = link_to 'New Post', new_post_path, class: 'button is-primary'
+.is-fluid
+  .columns
+    .column.is-3
+    .container.column
+      - if @posts.nil? or @posts.empty?
+        h1.is-size-2.has-text-centered No posts found!
+      - else
+        - if @tag_name.present?
+          span Search results for
+          a.tag = @tag_name
+        - @posts.each do |p|
+          - cache p do
+            == render partial: 'posts/post_listing', locals: { post: p }
+    .column.is-3
+      == render 'tags/numbered_tags'

@@ -26,20 +26,20 @@ LOREM
 
 Tag.create_or_find_by!(name: 'Untagged', permalink: 'untagged')
 
-if ENV['RAILS_ENV'] == 'development'
-  admin = User.find_by_email('admin@test.com')
+admin = User.find_by_email('admin@test.com')
 
-  if admin.nil?
-    admin = User.create_or_find_by(
-      name:                  'Admin',
-      email:                 'admin@test.com',
-      password:              '123456',
-	  password_confirmation: '123456',
-	  role:                  'admin'
-    )
-    admin.confirm
-  end
+if admin.nil?
+  admin = User.create_or_find_by(
+    name:                  'Admin',
+    email:                 'admin@test.com',
+    password:              '123456',
+    password_confirmation: '123456',
+    role:                  'admin'
+  )
+  admin.confirm
 
-  Post.create(title: "Lorem Ipsum", user: admin, content: lorem, summary: lorem_summary)
+  p "Seed created Admin users.id #{admin.id}"
+else
+  p 'Admin already present'
 end
 

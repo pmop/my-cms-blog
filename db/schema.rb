@@ -42,13 +42,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_14_083718) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
-  create_table "comments", force: :cascade do |t|
-    t.integer "post_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["post_id"], name: "index_comments_on_post_id"
-  end
-
   create_table "posts", force: :cascade do |t|
     t.integer "user_id", null: false
     t.text "content"
@@ -68,14 +61,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_14_083718) do
     t.index ["post_id", "tag_id"], name: "index_posts_tags_on_post_id_and_tag_id"
     t.index ["post_id"], name: "index_posts_tags_on_post_id"
     t.index ["tag_id"], name: "index_posts_tags_on_tag_id"
-  end
-
-  create_table "posts_users", id: false, force: :cascade do |t|
-    t.integer "post_id", null: false
-    t.integer "user_id", null: false
-    t.index ["post_id", "user_id"], name: "index_posts_users_on_post_id_and_user_id"
-    t.index ["post_id"], name: "index_posts_users_on_post_id"
-    t.index ["user_id"], name: "index_posts_users_on_user_id"
   end
 
   create_table "tags", force: :cascade do |t|
@@ -109,6 +94,5 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_14_083718) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "comments", "posts"
   add_foreign_key "posts", "users"
 end
