@@ -1,9 +1,10 @@
 # Simple CMS
 
-Simple CMS built on Ruby on Rails with support for rich text editing with Trix Editor/Active Text (Rails 6). **[Toy Project]**.
-
-Also supports authentication with Devise.
-
-Ruby 2.6.6
-
-Rails 6.
+Simple CMS/Blog built with Ruby on Rails.
+- Supports rich text editing with the Trix Editor and Action Text
+- Devise for authentication, Sign up, Lost Password and other authentication related flows
+- Upgraded to Ruby on Rails 7.
+- Ruby 3.2.x
+- Using [Bulma](https://bulma.io)
+- Using [Slim](https://github.com/slim-template/slim) for templates
+- Sqlite for the database

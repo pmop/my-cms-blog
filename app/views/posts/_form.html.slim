@@ -32,12 +32,12 @@ css:
     display: none;
   }
 
-= simple_form_for(@post) do |f|
-  .form-inputs
-    = f.input :title, id: 'article-title'
-    = f.input :tags, input_html: { value: @tags }, label: false, as: :tags
-    = f.rich_text_area :content, id: 'article-content'
+  rich_text_area :content
 
+= form_with model: @post do |f|
+  div class='field'
+    = f.label :content
+    = f.rich_text_area :content
   .form-actions
     = f.button :submit, class: 'button is-primary is-small'
 

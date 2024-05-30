@@ -1,18 +1,13 @@
 Rails.application.routes.draw do
   get 'dashboard/index'
   devise_for :users
-  root to: 'home#index'
+  root to: 'posts#index'
 
-  resources :comments
-  resources :posts, except: [:index] do
-    resource :comments, shallow: true
+  resources :posts do
+    get 'search', on: :collection
   end
 
-  resource :tags do
-    member do
-      get 'posts'
-    end
-  end
+  resource :tags
 
   get '/users/:id', to: 'users#show', as: :user
   get 'dashboard', to: 'dashboard#index'

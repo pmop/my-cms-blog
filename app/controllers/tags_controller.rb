@@ -4,21 +4,6 @@ class TagsController < ApplicationController
   before_action :set_tag, only: %i[edit update destroy]
   before_action :authenticate_user!, only: %i[edit update destroy]
 
-  def posts
-    @tag = Tag.find_by(permalink: search_params)
-    @posts = @tag.posts.newest
-    respond_to do |format|
-      if @posts.nil? || @tag.nil?
-        format.html { render :not_found }
-      else
-        format.html do
-          render :index,
-                 notice: "Posts tagged as #{search_params}"
-        end
-      end
-    end
-  end
-
   # GET /tags
   def show; end
 

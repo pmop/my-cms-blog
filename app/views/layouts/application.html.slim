@@ -1,30 +1,30 @@
 doctype html
 html
   head
-    title Dreams of Code
+    title #{Rails.application.config_for(:blog)[:name]}
     = csrf_meta_tags
     = csp_meta_tag
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = stylesheet_link_tag "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    = stylesheet_link_tag "actiontext", "data-turbo-track": "reload"
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
-    = javascript_include_tag 'https://cdn.jsdelivr.net/npm/vanilla-lazyload@16.0.0/dist/lazyload.min.js'
-    script type='text/javascript' src="https://cdn.jsdelivr.net/npm/bulma-tagsinput@2.0.0/dist/js/bulma-tagsinput.min.js"
-  body
-    .hero.is-fullheight.is-fullwidth
-      .hero-head
-        = render 'application/global_navbar'
-        - if user_signed_in? && (current_user.admin? || current_user.moderator? || current_user.editor?)
-          = render 'application/special_navbar'
-        - if notice.present?
-          .notification.is-warning
-            button.delete
-            p = notice
-      .hero-body
-        == yield
-      .hero-foot
-        == render 'application/footer'
+    / = javascript_include_tag 'https://cdn.jsdelivr.net/npm/vanilla-lazyload@16.0.0/dist/lazyload.min.js'
+    / script type='text/javascript' src="https://cdn.jsdelivr.net/npm/bulma-tagsinput@2.0.0/dist/js/bulma-tagsinput.min.js"
+  header.mb-4
+    == render 'application/global_navbar'
+    - if user_signed_in? && (current_user.admin? || current_user.moderator? || current_user.editor?)
+      = render 'application/special_navbar'
+    - if notice.present?
+      .notification.is-warning
+        button.delete
+        p = notice
+  body.has-background-light
+    == yield
+  footer
+    == render 'application/footer'
 
   javascript:
+    //Add event listener to be able to quit the notification
     document.addEventListener('DOMContentLoaded', () => {
       (document.querySelectorAll('.notification .delete') || []).forEach(($delete) => {
         $notification = $delete.parentNode;
@@ -33,7 +33,7 @@ html
         });
       });
     });
-
+    // Add Click event to Nav Burgers
     document.addEventListener('DOMContentLoaded', () => {
       // Get all "navbar-burger" elements
       const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
