@@ -9,7 +9,6 @@
                 .block
                   h1.title.is-1 = @post.title.titleize
                 .block
-                    span.subtitle.author #{@post.user.name}&nbsp;
                     span.subtitle #{@post.created_at.strftime("%d %B, %Y")}
                 .block.mt-4
                   == render partial: 'tags/post_header', locals: { tags: @post.tags }

@@ -27,44 +27,13 @@ $dark-gray: #A9A9A9;
 
 @import 'bulma';
 // @import "./actiontext.scss";
-@import 'bulma-tagsinput.min';
 
-.footer {
-	background-color: $dark-gray !important;
-	color: white;
-}
+$background: #f0f0f4;
 
 .listing-header {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
-}
-
-.listing-footer {
-	display: flex;
-	justify-content: space-between;
-}
-
-.author {
-	color: $oxford;
-	font-weight: 600;
-}
-
-.counter-tag {
-	background-color: $dark-gray !important;
-	color: white !important;
-}
-
-.post-header {
-	background-color: $paper-2;
-}
-
-body {
-	background-color: #fff1e5 !important;
-}
-
-hr {
-	background-color: black;
 }
 
 .img-placeholder {

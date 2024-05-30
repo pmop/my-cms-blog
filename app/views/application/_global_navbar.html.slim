@@ -1,18 +1,16 @@
-nav.navbar
-  .container
-    .navbar-brand
-      span.is-size-3
-        a.navbar-item href=root_path Dreams of Code
-      a.navbar-burger.burger role='button' aria-label='menu' aria-expanded='false' data-target='navbarMenuHero'
-        span aria-hidden='true'
-        span aria-hidden='true'
-        span aria-hidden='true'
-    div.navbar-menu id='navbarMenuHero'
-      .navbar-end
-        / a.navbar-item href=root_path Home
-        - unless user_signed_in?
-          a.navbar-item href=new_user_session_path Log in
-        - else
-          = link_to 'Log out', destroy_user_session_path(current_user), class: 'navbar-item', method: :delete
-        / a.navbar-item target='_blank' href='https://pmop.github.com' About me
+nav.navbar.has-background-light.p-4 role="navigation"
+  .navbar-brand
+    span.is-size-3
+      - if Rails.application.config_for(:blog)[:use_brand]
+          a href=root_path
+            img.navbar-item src='/brand.svg' style='width: 1in; height: auto;'
+      - else
+        a.navbar-item href=root_path #{Rails.application.config_for(:blog)[:name]}
+    a.navbar-burger.burger role='button' aria-label='menu' aria-expanded='false' data-target='navbarMenuHero'
+  div.navbar-menu id='navbarMenuHero'
+    .navbar-end
+      / a.navbar-item href=root_path Home
+      - if user_signed_in?
+        = link_to 'Log out', destroy_user_session_path(current_user), class: 'navbar-item', method: :delete
+      / a.navbar-item target='_blank' href='https://pmop.github.com' About me
 

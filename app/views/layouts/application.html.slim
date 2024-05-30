@@ -1,7 +1,7 @@
 doctype html
 html
   head
-    title Dreams of Code
+    title #{Rails.application.config_for(:blog)[:name]}
     = csrf_meta_tags
     = csp_meta_tag
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
@@ -18,9 +18,9 @@ html
       .notification.is-warning
         button.delete
         p = notice
-  body
+  body.has-background-light
     == yield
-  footer.footer
+  footer
     == render 'application/footer'
 
   javascript:
