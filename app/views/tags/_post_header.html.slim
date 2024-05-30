@@ -1,13 +1,6 @@
-scss:
-  $claret: #990f3d;
-  .listing-tag {
-      background-color: inherit !important;
-      color: $claret !important;
-      font-weight: 600 !important;
-      border: 2px solid $claret !important;
-  }
-
-- unless tags.nil?
-  .tags
-    - tags.each do |tag|
-      a.tag.listing-tag.is-link href=posts_tags_path(tag: tag.permalink) #{tag.name}
+- if tags.present?
+  span.subtitle Tags
+  .columns
+    - tags.each do |t|
+      .column
+        a.tag.is-link href=sanitize(search_posts_path(tag: t.permalink)) == t.name

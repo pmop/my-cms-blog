@@ -7,7 +7,7 @@
       - else
         - if @tag_name.present?
           span Search results for
-          a.tag = @tag_name
+          a.tag = @tag[:name]
         - @posts.each do |p|
           - cache p do
             == render partial: 'posts/post_listing', locals: { post: p }

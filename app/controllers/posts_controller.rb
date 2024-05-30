@@ -10,11 +10,9 @@ class PostsController < ApplicationController
     tag_permalink = params.permit(:tag)[:tag]&.strip.first(25).tr('^[a-z]', '')
 
     if tag_permalink
-      poststag_by_tag = PostsTag.by_tag_permalink_include_post_tag_name(tag_permalink)
-        .limit(10)
+      @posts = Post.includes(:tags).where(tags: { permalink: tag_permalink})
 
-      @tag_name = poststag_by_tag[0][:tag_name]
-      @posts = poststag_by_tag.map(&:post)
+      @tag = @posts[0].tags.first
 
       render :index
     end
@@ -28,7 +26,7 @@ class PostsController < ApplicationController
 
   # GET /posts/1
   def show
-    @post = Post.includes(:user).with_rich_text_content.find_by(permalink: params[:id])
+    @post = Post.includes(:user, :tags).with_rich_text_content.find_by(permalink: params[:id])
   end
 
   # GET /posts/new
