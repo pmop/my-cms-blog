@@ -1,0 +1,6 @@
+- if notice.present?
+  div.notifications data-controller='notification'
+   .container.container-hcenters.pt-4 data-notification-target='notice'
+     .notification.is-warning id='notify' style='width: 4in'
+       button.delete data-action="notification#close"
+       p = notice
