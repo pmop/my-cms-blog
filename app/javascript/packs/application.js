@@ -4,10 +4,8 @@
 // that code so it'll be compiled.
 
 import "@hotwired/turbo-rails".
-// import { Application } from "@hotwired/stimulus"
-// import { definitionsFromContext } from "@hotwired/stimulus-webpack-helpers"
 
-require("@rails/ujs").start()
+
 require("@rails/activestorage").start()
 require("channels")
 
@@ -23,8 +21,3 @@ require("trix")
 require("@rails/actiontext")
 require("lazysizes")
 import bulmaTagsinput from "../../../node_modules/bulma-tagsinput/dist/js/bulma-tagsinput.min.js"
-
-// window.Stimulus = Application.start()
-// const context = require.context("./controllers", true, /\.js$/)
-// Stimulus.load(definitionsFromContext(context))
-
