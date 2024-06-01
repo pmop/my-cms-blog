@@ -10,7 +10,7 @@ html
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   body.has-background-light
     - if user_signed_in? && (current_user.admin? || current_user.moderator? || current_user.editor?)
-      == render 'application/special_navbar'
+      = render 'application/special_navbar'
     .columns
       .column.is-2 style='margin-left: 2em; margin-top: 4em'
         .block style='margin-bottom: 2em'
@@ -24,9 +24,9 @@ html
                   a.navbar-item href=root_path #{Rails.application.config_for(:blog)[:name]}
             a.navbar-burger.burger role='button' aria-label='menu' aria-expanded='false' data-target='navbarMenuHero'
         .tag-container style='margin-left: 1em'
-          == render 'tags/numbered_tags'
+          = render 'tags/numbered_tags'
       .column style='margin-top: 4em'
-        == yield
+        = yield
       .column.is-2
   footer
-    == render 'application/footer'
+    = render 'application/footer'

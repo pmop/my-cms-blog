@@ -11,6 +11,6 @@
                 .block
                     span.subtitle #{@post.created_at.strftime("%d %B, %Y")}
                 .block.mt-4
-                  == render partial: 'tags/post_header', locals: { tags: @post.tags }
+                  = render partial: 'tags/post_header', locals: { tags: @post.tags }
               hr
-              == @post.content
+              = @post.content

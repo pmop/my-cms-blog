@@ -1,13 +1,13 @@
 .listing.box.mt-2
   .listing-header
     div.block.mt-4
-      h1.title.link href=post_path(post.permalink) == sanitize(post.title)
+      h1.title.link href=post_path(post.permalink) = sanitize(post.title)
     div.block.mt-2
       h3.subtitle = post.created_at.strftime("%d %B, %Y")
     / == render partial: 'tags/post_header',
       /locals: {tags: post.tags}
   .content.mt-2
-    == post.summary
+    = post.summary
   .block.mt-2
     a.link href=post_path(post.permalink) Continue reading
 

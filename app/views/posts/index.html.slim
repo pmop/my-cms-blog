@@ -1,4 +1,4 @@
-== render partial: 'notifications/notification'
+= render partial: 'notifications/notification'
 - if @posts.nil? or @posts.empty?
   h1.is-size-2.has-text-centered No posts found!
 - else
@@ -7,4 +7,4 @@
     a.tag = @tag[:name]
   - @posts.each do |p|
     - cache p do
-      == render partial: 'posts/post_listing', locals: { post: p }
+      = render partial: 'posts/post_listing', locals: { post: p }
