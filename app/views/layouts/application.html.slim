@@ -2,13 +2,13 @@ doctype html
 html
   head
     title #{Rails.application.config_for(:blog)[:name]}
-    meta name="turbo-refresh-method" content="morph"
     = csrf_meta_tags
     = csp_meta_tag
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = stylesheet_link_tag "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     = stylesheet_link_tag "actiontext", "data-turbo-track": "reload"
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    meta name="turbo-refresh-method" content="morph"
     css:
       .banner-logo {
         width: 1in;
@@ -16,25 +16,18 @@ html
         pointer-events: none;
       }
   header
-    nav.navbar.has-background-light role="navigation"
+    nav.navbar.has-background-light role="navigation" style='margin-bottom: 2em'
+      - if user_signed_in? && (current_user.admin? || current_user.moderator? || current_user.editor?)
+        = render 'application/special_navbar'
       .navbar-brand
         span.is-size-3
           - if Rails.application.config_for(:blog)[:use_brand]
-              a href=root_path
+              a href=root_path data-turbo="false"
                 object.banner-logo.navbar-item type='image/svg+xml' data='/brand.svg'
           - else
             a.navbar-item href=root_path #{Rails.application.config_for(:blog)[:name]}
       a.navbar-burger.burger role='button' aria-label='menu' aria-expanded='false' data-target='navbarMenuHero'
   body.has-background-light
-    - if user_signed_in? && (current_user.admin? || current_user.moderator? || current_user.editor?)
-      = render 'application/special_navbar'
-    .columns
-      .column.is-2 style='margin-left: 2em; margin-top: 4em'
-        .block style='margin-bottom: 2em'
-        .tag-container style='margin-left: 1em'
-          = render 'tags/numbered_tags'
-      .column style='margin-top: 4em'
-        = yield
-      .column.is-2
+    = yield
   footer
     = render 'application/footer'

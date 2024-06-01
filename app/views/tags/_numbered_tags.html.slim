@@ -1,9 +1,0 @@
-- if @tags.present? && !@tags.empty?
-  h1.subtitle Tags:
-  .tags.has-addons style='display: flex; gap: 1mm;'
-    - @tags.each do |tag|
-      - cache tag do
-        a.tag.is-link href=search_posts_path(tag: tag.permalink) = tag.name
-- elsif @tag.present?
-  h1.subtitle Showing posts by tag:
-  span.tag.is-primary #{@tag.name}

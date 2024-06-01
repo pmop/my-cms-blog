@@ -1,0 +1,7 @@
+- if @tag.present?
+  h1.subtitle Showing posts by tag:
+  span.tag.is-primary #{@tag.name}
+- elsif tags.present?
+  .tags
+    - tags.each do |tag|
+      a.tag.is-link href=search_posts_path(tag: tag.permalink) = tag.name
