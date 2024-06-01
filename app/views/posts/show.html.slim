@@ -1,16 +1,9 @@
-.content
-  section.section
-    .container.is-fluid
-      .columns.is-centered
-        .column.is-full-mobile.is-6-desktop
-          .container.is-post
-            - cache @post do
-              .listing-header
-                .block
-                  h1.title.is-1 = @post.title.titleize
-                .block
-                    span.subtitle #{@post.created_at.strftime("%d %B, %Y")}
-                .block.mt-4
-                  = render partial: 'tags/post_header', locals: { tags: @post.tags }
-              hr
-              = @post.content
+- cache @post do
+  .block
+    h1.title = @post.title.titleize
+  .block
+      span.subtitle #{@post.created_at.strftime("%d %B, %Y")}
+  .block.mt-4
+    = render partial: 'tags/post_header', locals: { tags: @post.tags }
+  hr
+  .content = @post.content
