@@ -4,4 +4,4 @@
 - elsif tags.present?
   .tags
     - tags.each do |tag|
-      a.tag.is-link href=search_posts_path(tag: tag.permalink) = tag.name
+      a.tag.is-link data-turbo-frame="posts" href=search_posts_path(tag: tag.permalink) = tag.name

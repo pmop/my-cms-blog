@@ -1,15 +1,15 @@
-ruby:
-  turbo_page_requires_reload
-.columns
-  .column.is-2 style='margin-left: 2em;'
-  .column
-    .block
-      h1.title = @post.title.titleize
-    .block
-        span.subtitle #{@post.created_at.strftime("%d %B, %Y")}
-    .block.mt-4
-      - if @post.tags.present?
-        = render partial: 'tags/tags', locals: { tags: @post.tags}
-    hr
-    .content = @post.content
-  .column.is-2
+main
+  turbo-frame id='post'
+    .columns
+      .column.is-2 style='margin-left: 2em;'
+      .column
+        .block
+          h1.title = @post.title.titleize
+        .block
+            span.subtitle #{@post.created_at.strftime("%d %B, %Y")}
+        .block.mt-4
+          - if @post.tags.present?
+            = render partial: 'tags/tags', locals: { tags: @post.tags}
+        hr
+        .content = @post.content
+      .column.is-2
