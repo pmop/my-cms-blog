@@ -8,53 +8,25 @@ html
     = stylesheet_link_tag "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     = stylesheet_link_tag "actiontext", "data-turbo-track": "reload"
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
-    / = javascript_include_tag 'https://cdn.jsdelivr.net/npm/vanilla-lazyload@16.0.0/dist/lazyload.min.js'
-    / script type='text/javascript' src="https://cdn.jsdelivr.net/npm/bulma-tagsinput@2.0.0/dist/js/bulma-tagsinput.min.js"
-  header.mb-4
-    == render 'application/global_navbar'
-    - if user_signed_in? && (current_user.admin? || current_user.moderator? || current_user.editor?)
-      = render 'application/special_navbar'
-    - if notice.present?
-      .notification.is-warning
-        button.delete
-        p = notice
   body.has-background-light
-    == yield
+    - if user_signed_in? && (current_user.admin? || current_user.moderator? || current_user.editor?)
+      == render 'application/special_navbar'
+    .columns
+      .column.is-2 style='margin-left: 2em; margin-top: 4em'
+        .block style='margin-bottom: 2em'
+          nav.navbar.has-background-light role="navigation"
+            .navbar-brand
+              span.is-size-3
+                - if Rails.application.config_for(:blog)[:use_brand]
+                    a href=root_path
+                      object.navbar-item type='image/svg+xml' data='/brand.svg' style='width: 1in; height: auto;'
+                - else
+                  a.navbar-item href=root_path #{Rails.application.config_for(:blog)[:name]}
+            a.navbar-burger.burger role='button' aria-label='menu' aria-expanded='false' data-target='navbarMenuHero'
+        .tag-container style='margin-left: 1em'
+          == render 'tags/numbered_tags'
+      .column style='margin-top: 4em'
+        == yield
+      .column.is-2
   footer
     == render 'application/footer'
-
-  javascript:
-    //Add event listener to be able to quit the notification
-    document.addEventListener('DOMContentLoaded', () => {
-      (document.querySelectorAll('.notification .delete') || []).forEach(($delete) => {
-        $notification = $delete.parentNode;
-        $delete.addEventListener('click', () => {
-          $notification.parentNode.removeChild($notification);
-        });
-      });
-    });
-    // Add Click event to Nav Burgers
-    document.addEventListener('DOMContentLoaded', () => {
-      // Get all "navbar-burger" elements
-      const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
-
-      // Check if there are any navbar burgers
-      if ($navbarBurgers.length > 0) {
-
-        // Add a click event on each of them
-        $navbarBurgers.forEach( el => {
-          el.addEventListener('click', el => {
-
-            // Get the target from the "data-target" attribute
-            const target = el.target.dataset.target;
-            const $target = document.getElementById(target);
-            console.log($target);
-
-            // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
-            $target.classList.toggle('is-active');
-
-          });
-        });
-      }
-
-    });
