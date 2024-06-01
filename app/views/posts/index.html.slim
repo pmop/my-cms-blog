@@ -1,15 +1,10 @@
-.is-fluid
-  .columns
-    .column.is-3
-    .container.column
-      - if @posts.nil? or @posts.empty?
-        h1.is-size-2.has-text-centered No posts found!
-      - else
-        - if @tag_name.present?
-          span Search results for
-          a.tag = @tag[:name]
-        - @posts.each do |p|
-          - cache p do
-            == render partial: 'posts/post_listing', locals: { post: p }
-    .column.is-3
-      == render 'tags/numbered_tags'
+== render partial: 'notifications/notification'
+- if @posts.nil? or @posts.empty?
+  h1.is-size-2.has-text-centered No posts found!
+- else
+  - if @tag_name.present?
+    span Search results for
+    a.tag = @tag[:name]
+  - @posts.each do |p|
+    - cache p do
+      == render partial: 'posts/post_listing', locals: { post: p }
