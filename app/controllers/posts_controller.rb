@@ -7,7 +7,7 @@ class PostsController < ApplicationController
 
   # GET /posts/search
   def search
-    tag_permalink = params.permit(:tag)[:tag]&.strip.first(25).tr('^[a-z]', '')
+    tag_permalink = params.permit(:tag)[:tag]&.strip.first(25).tr('^[a-z-]', '')
 
     if tag_permalink
       @posts = Post.includes(:tags).where(tags: { permalink: tag_permalink})
