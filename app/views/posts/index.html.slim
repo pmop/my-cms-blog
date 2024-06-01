@@ -1,29 +1,31 @@
-turbo-frame id='posts'
-  .columns
-    .column.is-2 style='margin-left: 2em;'
-      .tag-container style='margin-top: 1em'
-        = render partial: 'tags/tags', locals: { tags: @tags }
-    .column
-      = render partial: 'notifications/notification'
-      - if @posts.nil? or @posts.empty?
-        h1.is-size-2.has-text-centered No posts found!
-      - else
-        - @posts.each do |post|
-          .listing.box.mt-2
-            .listing-header
-              div.block.mt-4
-                h1.title.link href=post_path(post.permalink) = sanitize(post.title)
-              div.block.mt-2
-                h3.subtitle = post.created_at.strftime("%d %B, %Y")
-              / == render partial: 'tags/post_header',
-                /locals: {tags: post.tags}
-            .content.mt-2
-              = post.summary
-            .block.mt-2
-              a.link href=post_path(post.permalink) Continue reading
+main
+  turbo-frame id='posts' data-turbo-permanent="true"
+    .columns
+      .column.is-2 style='margin-left: 2em;'
+        div style='margin-top: 1em'
+          = render partial: 'tags/tags', locals: { tags: @tags }
+      .column
+        = render partial: 'notifications/notification'
+        - if @posts.nil? or @posts.empty?
+          h1.is-size-2.has-text-centered No posts found!
+        - else
+          .fixed-grid.has-1-cols-mobile.has-3-cols
+            .grid
+              - @posts.each do |post|
+                .cell
+                  .card
+                    .card-header.p-4
+                      h1.title = sanitize(post.title)
+                    .card-content
+                      h3.subtitle = post.created_at.strftime("%d %B, %Y")
+                      .content = post.summary.truncate(120)
+                      .block.mt-2
+                        = link_to 'Continue reading', post_path(post.permalink),
+                                                      data: { turbo_frame: '_top', turbo_action: 'advance' },
+                                                      class: 'link'
 
-            - if current_user.present?
-              .buttons
-                  = link_to 'Delete', post_path(post), method: :delete, class: 'button is-small is-danger'
-                  = link_to 'Edit', edit_post_path(post), class: 'button is-small is-link'
-    .column.is-2
+                  - if current_user.present?
+                    .buttons
+                        = link_to 'Delete', post_path(post), method: :delete, class: 'button is-small is-danger'
+                        = link_to 'Edit', edit_post_path(post), class: 'button is-small is-link'
+      .column.is-2
