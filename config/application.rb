@@ -10,6 +10,7 @@ module BlogApp
   class BlogApp::Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
+    config.action_view.form_with_generates_remote_forms = false
     # So Sprockets can see JS deps which are placed under node_modules
     config.assets.paths << Rails.root.join('node_modules')
 

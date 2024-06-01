@@ -1,17 +1,8 @@
 nav.navbar role='navigation' aria-label='main navigation'
-    .navbar_start
-      .navbar_item
-        .buttons style='margin-top: 12px; margin-left: 1rem;'
-          - if @post.present? && @post.id.present? && can?(:update, @post)
-            => link_to 'Edit Post', edit_post_path(@post),
-              class: 'navbar-item button is-small is-link'
-
-          - if current_user.admin? || current_user.editor?
-            => link_to('New Post', new_post_url,
-                class: 'navbar-item button is-small is-success')
-    .navbar-end
-      .navbar-item
-        .buttons.has-addons
-          - if current_user.admin?
-            = link_to dashboard_path, class:'button is-link is-rounded is-small' do
-              span Dashboard
+  .navbar_start
+    .navbar_item
+      .buttons style='margin-top: 12px; margin-left: 1rem;'
+        - if current_user.admin? || current_user.editor?
+          => link_to('New Post', new_post_url,
+              class: 'navbar-item button is-small is-success')
+  .navbar-end

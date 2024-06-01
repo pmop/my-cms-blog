@@ -1,6 +1,0 @@
-- if tags.present?
-  span.subtitle Tags
-  .columns
-    - tags.each do |t|
-      .column
-        a.tag.is-link href=sanitize(search_posts_path(tag: t.permalink)) == t.name
