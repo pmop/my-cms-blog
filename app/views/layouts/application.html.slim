@@ -8,6 +8,12 @@ html
     = stylesheet_link_tag "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     = stylesheet_link_tag "actiontext", "data-turbo-track": "reload"
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    css:
+      .banner-logo {
+        width: 1in;
+        height: auto;
+        pointer-events: none;
+      }
   body.has-background-light
     - if user_signed_in? && (current_user.admin? || current_user.moderator? || current_user.editor?)
       = render 'application/special_navbar'
@@ -19,7 +25,7 @@ html
               span.is-size-3
                 - if Rails.application.config_for(:blog)[:use_brand]
                     a href=root_path
-                      object.navbar-item type='image/svg+xml' data='/brand.svg' style='width: 1in; height: auto;'
+                      object.banner-logo.navbar-item type='image/svg+xml' data='/brand.svg'
                 - else
                   a.navbar-item href=root_path #{Rails.application.config_for(:blog)[:name]}
             a.navbar-burger.burger role='button' aria-label='menu' aria-expanded='false' data-target='navbarMenuHero'
