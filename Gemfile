@@ -32,7 +32,9 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 
+  gem 'factory_bot_rails', '~> 6.4', '>= 6.4.3'
   gem 'rspec-rails', '~> 6.1.0'
+  gem 'faker', '~> 3.4', '>= 3.4.1'
 end
 
 group :development do
@@ -43,7 +45,6 @@ group :development do
   gem 'rubocop', '~> 1.63', '>= 1.63.3', require: false
   gem 'rubocop-rails', '~> 2.24', '>= 2.24.1', require: false
   gem 'rubocop-performance', '~> 1.21'
-  gem 'faker', '~> 3.4', '>= 3.4.1'
 end
 
 group :test do
