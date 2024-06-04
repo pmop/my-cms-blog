@@ -1,4 +1,4 @@
 shared:
   name: My Blog
-  use_brand: true
+  use_brand: false
 

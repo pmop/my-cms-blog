@@ -9,9 +9,10 @@ class PostsController < ApplicationController
   def search
     tag_permalink = params.permit(:tag)[:tag]&.strip.first(25).tr('^[a-z-]', '')
 
-    if tag_permalink
-      @posts = Post.includes(:tags).where(tags: { permalink: tag_permalink})
+    return untagged_posts if tag_permalink == 'untagged'
 
+    if tag_permalink.present?
+      @posts = Post.includes(:tags).where(tags: { permalink: tag_permalink})
       @tag = @posts[0]&.tags&.first
 
       render :index
@@ -20,13 +21,13 @@ class PostsController < ApplicationController
 
   # GET /posts
   def index
-    @tags = Tag.all
+    @tags = [*Tag.all, untagged_tag]
     @posts = Post.with_rich_text_content.first(posts_limit)
   end
 
   # GET /posts/1
   def show
-    @post = Post.includes(:user, :tags).with_rich_text_content.find_by(permalink: params[:id])
+    @post = Post.includes(:user, :tags).with_rich_text_content.find_by!(permalink: params[:id])
   end
 
   # GET /posts/new
@@ -106,6 +107,17 @@ class PostsController < ApplicationController
 
   def posts_limit
     10
+  end
+
+  def untagged_posts
+    @posts = Post.includes(:tags).where(tags: { id: nil})
+    @tag = untagged_tag
+
+    render :index
+  end
+
+  def untagged_tag
+    @untagged_tag ||= OpenStruct.new(name: 'Untagged', permalink: 'untagged')
   end
 
   def more_than_10_posts?
