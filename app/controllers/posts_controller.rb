@@ -12,7 +12,7 @@ class PostsController < ApplicationController
     if tag_permalink
       @posts = Post.includes(:tags).where(tags: { permalink: tag_permalink})
 
-      @tag = @posts[0].tags.first
+      @tag = @posts[0]&.tags&.first
 
       render :index
     end
