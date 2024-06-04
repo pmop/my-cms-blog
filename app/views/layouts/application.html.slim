@@ -28,6 +28,7 @@ html
             a.navbar-item href=root_path #{Rails.application.config_for(:blog)[:name]}
       a.navbar-burger.burger role='button' aria-label='menu' aria-expanded='false' data-target='navbarMenuHero'
   body.has-background-light
-    = yield
+    div style='min-height: 8in'
+      = yield
   footer
     = render 'application/footer'
