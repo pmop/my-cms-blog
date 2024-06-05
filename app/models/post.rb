@@ -6,6 +6,11 @@ class Post < ApplicationRecord
 
   scope :untagged, -> { includes(:tags).where(tags: { id: nil }) }
 
+  scope :by_tag_include_tag_attrs, ->(tag_permalink) do
+    includes(:tags).where(tags: { permalink: tag_permalink})
+      .select('tags.name as tag_name, tags.permalink as tag_permalink, posts.*')
+  end
+
   belongs_to :user
   has_rich_text :content
 

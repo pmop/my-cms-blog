@@ -8,15 +8,12 @@ class PostsController < ApplicationController
 
   # GET /posts/search
   def search
-    tag_permalink = params.permit(:tag)[:tag]&.strip.first(25).tr('^[a-z-]', '')
+    tag_permalink = sanitize_tag_permalink(params.permit(:tag)[:tag])
 
     return untagged_posts if tag_permalink == virtual_untagged_tag.permalink
 
     if tag_permalink.present?
-      @posts = Post.includes(:tags)
-                   .where(tags: { permalink: tag_permalink})
-                   .select('tags.name as tag_name, tags.permalink as tag_permalink, posts.*')
-
+      @posts = Post.by_tag_include_tag_attrs(tag_permalink)
       @tag = virtual_tag(@posts[0].tag_name, @posts[0].tag_permalink) if @posts[0].present?
 
       render :index
