@@ -34,6 +34,7 @@ rescue ActiveRecord::PendingMigrationError => e
 end
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
+  config.include TagsHelper
   config.fixture_paths = [
     Rails.root.join('spec/fixtures')
   ]
