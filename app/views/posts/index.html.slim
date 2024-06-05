@@ -27,6 +27,6 @@ turbo-frame id='posts'
                   - if current_user.present?
                     .card-footer
                       = link_to 'Delete', post_path(post), method: :delete, class: 'card-footer-item'
-                      = link_to 'Edit', edit_post_path(post), class: 'card-footer-item'
+                      = link_to 'Edit', edit_post_path(post), class: 'card-footer-item', data: { turbo_frame: '_top' }
 
     .column.is-2
