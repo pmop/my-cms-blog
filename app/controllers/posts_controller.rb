@@ -4,16 +4,20 @@ class PostsController < ApplicationController
   before_action :set_post, only: %i[edit update destroy]
   before_action :set_user, only: %i[create update]
   before_action :authenticate_user!, only: %i[new edit update destroy]
+  include TagsHelper
 
   # GET /posts/search
   def search
     tag_permalink = params.permit(:tag)[:tag]&.strip.first(25).tr('^[a-z-]', '')
 
-    return untagged_posts if tag_permalink == 'untagged'
+    return untagged_posts if tag_permalink == virtual_untagged_tag.permalink
 
     if tag_permalink.present?
-      @posts = Post.includes(:tags).where(tags: { permalink: tag_permalink})
-      @tag = @posts[0]&.tags&.first
+      @posts = Post.includes(:tags)
+                   .where(tags: { permalink: tag_permalink})
+                   .select('tags.name as tag_name, tags.permalink as tag_permalink, posts.*')
+
+      @tag = virtual_tag(@posts[0].tag_name, @posts[0].tag_permalink) if @posts[0].present?
 
       render :index
     end
@@ -21,7 +25,7 @@ class PostsController < ApplicationController
 
   # GET /posts
   def index
-    @tags = [*Tag.all, untagged_tag]
+    @tags = [*Tag.all, virtual_untagged_tag]
     @posts = Post.with_rich_text_content.first(posts_limit)
   end
 
@@ -101,26 +105,14 @@ class PostsController < ApplicationController
     params.permit(:permalink)
   end
 
-  def posts_by_tag(tag)
-    Post
-  end
-
   def posts_limit
     10
   end
 
   def untagged_posts
-    @posts = Post.includes(:tags).where(tags: { id: nil})
-    @tag = untagged_tag
+    @posts = Post.untagged
+    @tag = virtual_untagged_tag
 
     render :index
-  end
-
-  def untagged_tag
-    @untagged_tag ||= OpenStruct.new(name: 'Untagged', permalink: 'untagged')
-  end
-
-  def more_than_10_posts?
-    return @posts.present? && @posts.first.id > 10
   end
 end

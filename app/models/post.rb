@@ -4,6 +4,8 @@ class Post < ApplicationRecord
   include ActionView::Helpers::TextHelper
   include ActionView::Helpers::SanitizeHelper
 
+  scope :untagged, -> { includes(:tags).where(tags: { id: nil }) }
+
   belongs_to :user
   has_rich_text :content
 
