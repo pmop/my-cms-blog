@@ -10,20 +10,18 @@ class PostsController < ApplicationController
   def search
     tag_permalink = sanitize_tag_permalink(params.permit(:tag)[:tag])
 
-    return untagged_posts if tag_permalink == virtual_untagged_tag.permalink
+    @posts = Post.by_tag_permalink(tag_permalink).limit(posts_limit)
+    @tag = virtual_tag_for(@posts[0], tag_permalink)
+    @pages = pages_for(@posts)
 
-    if tag_permalink.present?
-      @posts = Post.by_tag_include_tag_attrs(tag_permalink)
-      @tag = virtual_tag(@posts[0].tag_name, @posts[0].tag_permalink) if @posts[0].present?
-
-      render :index
-    end
+    render :index
   end
 
   # GET /posts
   def index
     @tags = [*Tag.all, virtual_untagged_tag]
     @posts = Post.with_rich_text_content.first(posts_limit)
+    @pages = pages(@posts)
   end
 
   # GET /posts/1
@@ -104,6 +102,10 @@ class PostsController < ApplicationController
 
   def posts_limit
     10
+  end
+
+  def pages_for(posts)
+    (posts.count/posts_limit) + 1
   end
 
   def untagged_posts

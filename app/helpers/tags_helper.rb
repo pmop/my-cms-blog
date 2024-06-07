@@ -9,6 +9,14 @@ module TagsHelper
     OpenStruct.new(name:, permalink:)
   end
 
+  def virtual_tag_for(post, permalink)
+    return nil if !post.present?
+
+    return virtual_untagged_tag if permalink == virtual_untagged_tag.permalink
+
+    virtual_tag(post.tag_name, post.tag_permalink)
+  end
+
   def sanitize_tag_permalink(input)
     input&.strip&.first(25)&.tr('^[a-z-]', '')
   end
